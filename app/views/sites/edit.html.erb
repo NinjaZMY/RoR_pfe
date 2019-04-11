@@ -1,0 +1,7 @@
+<h3>Mettre à jour les détails d'un site</h3>
+<%= form_with model: @site do |form| %>
+  <%= form.text_field :nom, placeholder: "nom du site" %>
+  <%= form.text_field :url, placeholder: "url" %>
+
+  <%= form.submit %>
+<% end %>
