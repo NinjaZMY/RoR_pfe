@@ -15,6 +15,11 @@ ActiveRecord::Schema.define(version: 2019_03_12_111020) do
   create_table "sites", force: :cascade do |t|
     t.string "nom"
     t.string "url"
+    t.text "img"
+    t.integer "time_to_watch", default: 0, null: false
+    t.string "Respository", default: "", null: false
+    t.integer "Notification_Number"
+    t.integer "userId"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
