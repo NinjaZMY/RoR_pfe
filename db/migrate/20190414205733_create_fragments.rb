@@ -4,6 +4,7 @@ class CreateFragments < ActiveRecord::Migration[5.2]
       t.integer :idSite
       t.integer :ordre
       t.integer :length
+      t.text    :content
 
       t.timestamps
 
