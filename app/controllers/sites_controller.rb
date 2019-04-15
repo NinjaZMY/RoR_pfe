@@ -11,10 +11,12 @@ class SitesController < ApplicationController
 
   def new
     @site = Site.new
+    
   end
 
   def create
     site = Site.create(site_params)
+    @fragment = Fragment.create(:site_id => site[:id] )
     
     redirect_to site_path(site)
   end
@@ -39,6 +41,9 @@ class SitesController < ApplicationController
   def site_params
     params.require(:site).permit(:nom, :url)
   end
+
+  
+
 
   def current_site
     @site = Site.find(params[:id])
