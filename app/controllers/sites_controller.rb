@@ -6,7 +6,6 @@ class SitesController < ApplicationController
   end
 
   def show
-  #Fragment.create(idSite:current_site[:id])
 
   end
 
@@ -16,6 +15,7 @@ class SitesController < ApplicationController
 
   def create
     site = Site.create(site_params)
+    
     redirect_to site_path(site)
   end
 
@@ -25,13 +25,12 @@ class SitesController < ApplicationController
 
   def update
     @site.update(site_params)
-
+    
     redirect_to site_path(@site)
   end
 
   def destroy
     @site.destroy
-
     redirect_to sites_path
   end
 

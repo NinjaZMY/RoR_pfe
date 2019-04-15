@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2019_04_14_205733) do
 
   create_table "fragments", force: :cascade do |t|
-    t.integer "idSite"
+    t.integer "site_id"
     t.integer "ordre"
     t.integer "length"
     t.text "content"
