@@ -26,18 +26,31 @@ class SitesController < ApplicationController
         if ($e!="")
         redirect_to new_site_path
         else
-        site = Site.create(site_params)
-        # do the next thing
-         
+          begin
+          $e=""#connected
+          content = Nokogiri::HTML(open(site_params[:url]))
+          rescue Exception => $e
+          end     
+          
+          if ($e!="") #not connected
+          redirect_to new_site_path
+          else
+          #site_id , length=1 , ordre = 1 ; content = "the whole page"
+          
+          site = Site.create(site_params)
+          # do the next thing
+          content=content.to_s  
 
       
 
 
     
     
-        @fragment = Fragment.create(:site_id => site[:id] )
+          @fragment = Fragment.create(:site_id => site[:id] , 
+           :length => 1 , :ordre => 1   , :content => content )
     
-        redirect_to site_path(site)
+          redirect_to site_path(site)
+          end  
         end
   end
 
