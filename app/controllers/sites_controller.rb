@@ -16,10 +16,29 @@ class SitesController < ApplicationController
   end
 
   def create
-    site = Site.create(site_params)
-    @fragment = Fragment.create(:site_id => site[:id] )
     
-    redirect_to site_path(site)
+      begin
+        $e=""#connected
+        connexion = Nokogiri::HTML(open('https://www.google.com/'))
+        rescue Exception => $e
+      end     
+        
+        if ($e!="")
+        redirect_to new_site_path
+        else
+        site = Site.create(site_params)
+        # do the next thing
+         
+
+      
+
+
+    
+    
+        @fragment = Fragment.create(:site_id => site[:id] )
+    
+        redirect_to site_path(site)
+        end
   end
 
   def edit
