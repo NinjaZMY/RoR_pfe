@@ -1,7 +1,29 @@
-<h3>Ajouter un Site</h3>
-<%= form_with model: @site do |form| %>
-  <%= form.text_field :nom, placeholder: "nom de site" %>
-  <%= form.text_field :url, placeholder: "url" %>
+<%
+begin
+      $e=""#connected
+      connexion = Nokogiri::HTML(open('https://www.google.com/'))
+      rescue Exception => $e
+end     
+        
+        
+        
+        
+        
+        # do the next thing
+         
 
-  <%= form.submit 'Ajouter un site' %>
-<% end %>
+      
+
+if ($e!="")
+%>
+<%=raw "<h1>Connection State : #{$e}</h1>"%>
+<%else%>
+  <h3>Ajouter un Site</h3>
+  <%= form_with model: @site do |form| %>
+    <%= form.text_field :nom, placeholder: "nom de site" %>
+    <%= form.text_field :url, placeholder: "url" %>
+
+    <%= form.submit 'Ajouter un site' %>
+  <% end %>
+
+<%end%>

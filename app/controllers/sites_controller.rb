@@ -1,3 +1,4 @@
+require 'open-uri'
 class SitesController < ApplicationController
   before_action :current_site, only: [:show, :edit, :update, :destroy]
 
@@ -11,7 +12,7 @@ class SitesController < ApplicationController
 
   def new
     @site = Site.new
-    
+      
   end
 
   def create
