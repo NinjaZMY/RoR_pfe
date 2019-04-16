@@ -35,16 +35,20 @@ class SitesController < ApplicationController
           if ($e!="") #not connected
           redirect_to new_site_path
           else
-          #site_id , length=1 , ordre = 1 ; content = "the whole page"
-          
-          site = Site.create(site_params)
+          #:nom , :url , :user_id
+          user_id = current_user[:id] 
+          url = site_params[:url] 
+          nom = site_params[:nom]
+          site = Site.create(:nom => nom , :url => url ,
+           :user_id => user_id )
           # do the next thing
           content=content.to_s  
 
       
 
 
-    
+          #site_id , length=1 , ordre = 1 ; content = "the whole page"
+            
     
           @fragment = Fragment.create(:site_id => site[:id] , 
            :length => 1 , :ordre => 1   , :content => content )

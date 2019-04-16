@@ -1,10 +1,18 @@
 <table>
-  <% @sites.each do |site| %>
-    <tr>
-      <td><%= link_to site.nom, site_path(site) %></td>
-      <td><%= button_to 'Modifier lien', edit_site_path(site), method: 'get'%></td>
-      <td><%= button_to 'Supprimer lien', site_path(site), method: 'delete',
-       data: { confirm: "Voulez vous vraiment Supprimer le lien de #{site[:nom]} ?" } %></td>
-  <% end %>
+  <% 
+  unless(current_user.nil?)
+    user_id=current_user[:id]
+    @sites.each do |site|
+      if(site[:user_id]==user_id)  
+      %>
+        <tr>
+          <td><%= link_to site.nom, site_path(site) %></td>
+          <td><%= button_to 'Modifier lien', edit_site_path(site), method: 'get'%></td>
+          <td><%= button_to 'Supprimer lien', site_path(site), method: 'delete',
+          data: { confirm: "Voulez vous vraiment Supprimer le lien de #{site[:nom]} ?" } %></td>
+      
+      <%end%>
+    <% end %>
+  <%end%>
 </table>
 <%= link_to "Ajouter un nouveau site", new_site_path %>

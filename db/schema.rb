@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2019_04_16_124853) do
     t.integer "time_to_watch", default: 0, null: false
     t.string "Respository", default: "", null: false
     t.integer "Notification_Number"
-    t.integer "userId"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
