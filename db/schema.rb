@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_16_124853) do
+ActiveRecord::Schema.define(version: 2019_04_16_183355) do
 
   create_table "fragments", force: :cascade do |t|
-    t.integer "site_id"
     t.integer "ordre"
     t.integer "length"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "site_id"
+    t.index ["site_id"], name: "index_fragments_on_site_id"
   end
 
   create_table "sites", force: :cascade do |t|
@@ -28,9 +29,10 @@ ActiveRecord::Schema.define(version: 2019_04_16_124853) do
     t.integer "time_to_watch", default: 0, null: false
     t.string "Respository", default: "", null: false
     t.integer "Notification_Number"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_sites_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
