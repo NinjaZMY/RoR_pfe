@@ -6,10 +6,10 @@ Rails.application.routes.draw do
   get "signin" => "devise/sessions#new"
   delete "logout" => "devise/sessions#destroy"
   get "signup" => "devise/registrations#new"
-  root "devise/sessions#new"
   
   end
 
+  root "sites#index"
 
 
 end

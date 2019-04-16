@@ -12,10 +12,32 @@
   </head>
   
   <body>
+    <%$pageUrl=request.original_fullpath 
+    sign_in_page="/users/sign_in"
+    sign_up_page="/users/sign_up"
+    if($pageUrl!=sign_in_page&& current_user.nil?&&$pageUrl!=sign_up_page)
+    $pageUrl=sign_in_page
+      %>
+    <script>
+    location.href=location.origin+"<%=$pageUrl%>";
+    </script>
+    <%
+    end
+    %>
+    
     <!--Flash Messages -->
       <% flash.each do |name,message| %>
       <%= content_tag(:div , message , class:"alert alert-info #{name}" ) %>
       <%end%>
+    <%
+    if ( ! current_user.nil?)
+    %>
+    
+    
+    <%="welcome "+current_user[:email]%>
+     <%= link_to "Log out", logout_path , method: :delete, class: " btn btn-secondary" %>
+    <%end%>
     <%= yield %>
   </body>
-</html>
+  
+  </html>
