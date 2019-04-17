@@ -179,7 +179,7 @@
   {
       position: absolute;
       right: 110px;
-      top: 1692px;
+      top: 1675px;
       font-size: 14px;
       color: lightgray;
   }
@@ -343,9 +343,16 @@
     left: 400px;
     position: relative;
     bottom: 244px;
-    font-size: 22px;
+    font-size: 14px;
     font-family: monospace;
     width: 68%;
+}
+
+.navFooter:hover
+{
+  background-color:transparent;
+  height:100%;
+  width:100%;
 }
 
 .navFooter
@@ -357,7 +364,7 @@
 
 #footer_link1
 {
-bottom:50px;
+bottom:10px;
 }
 #footer_link2
 {
@@ -365,13 +372,18 @@ bottom:50px;
 }
 #footer_link3
 {
-top:50px;
+top:10px;
+}
+
+#footer_link4
+{
+top:20px;  
 }
 
 .page1
 {
-top: -225px;
-
+top: -240px;
+left: 435px;
 
 }
 .page2
