@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   get "signup" => "devise/registrations#new"
   
   end
-
+  get "home1" => "sites#home1"
+  get "home2" => "sites#home2"
+  get "home3" => "sites#home3"
+  get "home4" => "sites#home4"
+  
   root "sites#index"
 
 

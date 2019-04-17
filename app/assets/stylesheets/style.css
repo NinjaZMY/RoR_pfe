@@ -1,0 +1,387 @@
+ 
+
+ 
+
+  #Bg
+  {
+
+    background-repeat: no-repeat;
+    height: 3811px;
+    background-image: url(a1.jpg);
+    background-size: 100%;
+    
+    width:100%
+  }
+
+  #Bg2
+  {
+    background-repeat: no-repeat;
+    position: inline;
+    background-image: url(a2.jpg);
+    background-size: 100%;
+    height: 3345px;
+    width:100%;
+    z-index: -1;
+    
+
+  }
+
+  #Bg3
+  {
+
+    background-repeat: no-repeat;
+
+    background-image: url(a3.jpg);
+    background-size: 100%;
+    height: 1845px;
+    width:100%
+  }
+
+
+  #Bg4 
+  {
+      background-image: url(a4.jpg);
+      background-size: 100%;
+      height: 1896px;
+      width: 100%;
+      background-repeat: no-repeat;
+  }
+
+
+  #BGapp
+  {
+
+
+    background-image: url(app.jpg);
+    background-size: 100%;
+    height: 900px;
+    width:100%
+  }
+
+
+  #nabar
+  {
+    width:200px;
+    position:absolute;
+    width:50%;
+    right: 140px;
+    top: 84px;
+    font-size: 20px;
+    line-height: 17px;
+    vertical-align: middle;
+  }
+
+
+
+ 
+  .link
+  {
+  position: absolute;
+  top:2846px;
+  text-align:center;
+  width:272px;
+  margin-left: 0px;	
+
+  }
+
+  #lien1
+  {
+  left:165px;	
+  }
+
+  #lien2
+  {
+  left: 494px;	
+  }
+
+  #lien3
+  {
+  left: 820px;
+  }
+
+  #login
+  {
+    position:absolute;
+    width:10%;
+    right: 140px;
+    top:160px;
+    font-size: 20px;
+    font-weight: bold; 
+  }
+
+  #login1
+  {
+    position:absolute;
+    width:7%;
+    left: 510px;
+    top:160px;
+    font-size: 20px;
+    font-weight: bold; 
+  }
+
+  .Rimg
+  {
+  position: absolute;
+  right:100px;
+  }
+
+  #img1
+  {
+  top:900px;
+
+  }
+
+  #img2
+  {
+  position: absolute;
+  top:1380px;
+  left: 100px;
+  }
+
+  #img3
+  {
+  top:1950px;
+
+  }
+
+  .linkForm
+  {
+  top:3%;	
+  width:27%;
+  left: 23.5%;
+  position: relative;
+  display: iniline;
+  opacity: 0.7	;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  border-color: gray;
+  }
+
+  .textwidget
+  {
+  position: absolute;
+  right: 110px;
+  top: 3600px;
+  font-size: 14px;
+  color: lightgray;
+  }
+  .textwidget2
+  {
+  position: absolute;
+  right:110px;
+    
+  top: 3199px;
+  font-size: 14px;
+  color: lightgray;
+  }
+  .textwidget4 
+  {
+      position: absolute;
+      right: 110px;
+      top: 1692px;
+      font-size: 14px;
+      color: lightgray;
+  }
+  .textwidget3
+  {
+  position: absolute;
+  right: 110px;
+  top: 1637px;
+  font-size: 14px;
+  color: lightgray;
+  }
+
+  .wpcf7-submit 
+  {   
+      left: -166px;
+      bottom:1px;
+      position:relative;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      padding: 0.375rem 0.75rem;
+      height: calc(1.5em + 0.75rem + 4px);
+      width: 100%;
+      display: block;  
+      border-bottom-right-radius: 30px;
+      border-top-right-radius: 30px;
+      border: 1px solid #747b80;
+      border-left: none;
+      background-color: #c4c7c9;
+      color: #2b2e30;
+      margin-left: -2px;
+      width: auto;
+
+
+  }
+
+  .wpcf7-email
+  {   
+      background-image: url("newsletter.png");
+      position: relative;
+      left: 10px;
+      border: 1px solid #ced4da;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      padding: 0.375rem 0.75rem;
+      height: calc(1.5em + 0.75rem + 2px);
+      width: 60%;
+      display: block;  
+      border-bottom-left-radius: 30px;
+      border-top-left-radius: 30px;
+      background-position: 92% 50%;
+      background-repeat: no-repeat;
+      border-right: none;
+      padding-right: 50px;	
+      border: 1px solid #747b80;
+      background-color: #747b80;
+      color: #fff;
+  }
+
+  .wpcf7-list-item-label  , [class="wpcf7-form invalid"]
+  {
+    position: relative;;
+        left: -350px;
+  }
+
+  .accordionExample
+  {
+
+  position: relative;
+
+  top: -885px;
+  z-index: 8;
+  }
+
+  .video
+  {	
+    position: absolute;
+    top:800px;
+    left:71px;
+  }
+
+  #v2
+  {	
+    left: 71px;
+    top: 1174px;
+  }
+
+  .fadenavimg 
+{
+    position: absolute;
+    top: 80px;
+    width: 400px;
+    left: 50%;
+    height: 300px;
+}
+
+  .tab-content
+  {
+    position: absolute;
+    top:70px;
+
+  }
+
+  #default-tab
+  {
+  position: absolute;
+  width:1284px;
+  height: 855px;
+  top:  -270px;
+  background-image: url("1.jpg");
+  background-size: 100%;
+  opacity: 0.2;
+  display: block;
+    z-index: -1; 
+  }
+
+  .col-md-12
+  {
+      max-width: 60%;
+  }
+
+  body
+  {
+  padding: 0;
+  margin: 0;
+  }    
+
+  .input-group
+  {
+      left: 450px;
+  }
+
+  .wpcf7-list-item-label 
+  {
+    position: relative;
+    left:470px;
+  }
+
+  [name="rgpd[]"]
+  {
+  position: relative;
+  left:460px;
+  top:2.5px;
+  }
+
+  h5
+  {
+    position: relative;
+    left: 110px
+  }
+
+.NavButton 
+{
+    bottom: -4px;
+    position: relative;
+}
+
+.footer 
+{
+    left: 400px;
+    position: relative;
+    bottom: 244px;
+    font-size: 22px;
+    font-family: monospace;
+    width: 68%;
+}
+
+.navFooter
+{
+  position:relative;
+  color:lightgray;
+  
+}
+
+#footer_link1
+{
+bottom:50px;
+}
+#footer_link2
+{
+
+}
+#footer_link3
+{
+top:50px;
+}
+
+.page1
+{
+top: -225px;
+
+
+}
+.page2
+{
+  bottom: 218px;
+  left: 429px;
+}
+
+.page3
+{
+  top: -241px;
+  left: 423px;
+}
