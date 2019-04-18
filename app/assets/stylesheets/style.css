@@ -471,3 +471,13 @@ opacity: 0.7;
   left : 31%;
   top:0;
 }
+
+#fragment
+{
+  position: absolute;
+  left:30%;
+  width:70%;
+  top:35%;
+  overflow-y:auto;
+  height: 432px;
+}

@@ -7,6 +7,7 @@ content=Fragment.find_by( site_id: site_id ).content
 
 
 <body  >
+<div class='Connexion_Problem'>
 <h1><%= @site.nom %></h1>
 <h4>"<%= @site.url %>"</h4>
 <br>
@@ -17,7 +18,7 @@ content=Fragment.find_by( site_id: site_id ).content
 <%= link_to 'Modifier Lien',edit_site_path(@site), method: 'get' %>
 <%= link_to 'Supprimer Lien', @site, method: :delete, data: 
  { confirm: "Voulez vous vraiment Supprimer le lien de #{@site[:nom]} ?" } %>
- 
+ </div>
 
 
 
