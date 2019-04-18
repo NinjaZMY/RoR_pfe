@@ -149,34 +149,34 @@ body
     
     <%
     end
-    if ( ! current_user.nil?)
+    if ( ! current_user.nil?) #if user is connected then display app
     %>
     
-    
-    <%="welcome "+current_user[:email]%>
-     <%= link_to "LOG OUT", logout_path , method: :delete,
-      class: "button btn btn-secondary" , id:"logout" %>
-    <%end%>
-    
-      <div class="siteNav">
-        <% 
-        @sites=Site.all
-        unless(current_user.nil?)
-          user_id=current_user[:id]
-          @sites.each do |site|
-            if(site[:user_id]==user_id)  
-            %>
-              
-                <%= link_to site.nom, site_path(site) %>
-                <%= button_to 'Modifier lien', edit_site_path(site), method: 'get'%>
-                <%= button_to 'Supprimer lien', site_path(site), method: 'delete',
-                data: { confirm: "Voulez vous vraiment Supprimer le lien de #{site[:nom]} ?" } %>
-            <br>
-            <%end%>
-          <% end %>
-        <%end%>
-      </div>        
-    
+    <div id="BGapp">
+      <%="welcome "+current_user[:email]%>
+      <%= link_to "LOG OUT", logout_path , method: :delete,
+        class: "button btn btn-secondary" , id:"logout" %>
+      <%end%>
+      
+        <div class="siteNav">
+          <% 
+          @sites=Site.all
+          unless(current_user.nil?)
+            user_id=current_user[:id]
+            @sites.each do |site|
+              if(site[:user_id]==user_id)  
+              %>
+                
+                  <%= link_to site.nom, site_path(site) %>
+                  <%= button_to 'Modifier lien', edit_site_path(site), method: 'get'%>
+                  <%= button_to 'Supprimer lien', site_path(site), method: 'delete',
+                  data: { confirm: "Voulez vous vraiment Supprimer le lien de #{site[:nom]} ?" } %>
+              <br>
+              <%end%>
+            <% end %>
+          <%end%>
+        </div>        
+    </div>
     <%= yield %>
 
   </body>
