@@ -66,7 +66,40 @@ body
   margin:0;
   padding:0;
 }
-  </style>
+
+.popover-btn
+{
+    width:100%;
+}
+
+ .popover-header 
+{
+    opacity:0.7;
+    background-color:black;
+    max-width:100%;
+    max-height:18%;
+    text-align:center;
+    color:lightgray;
+    position:relative;
+    bottom:0px;
+    
+}
+
+ .popover  
+{
+max-width:100%;
+height:32%;
+background-color:lightgray;
+opacity:0.9;
+position:relative;
+
+}
+
+
+
+
+
+</style>
   <body >
     <%$pageUrl=request.original_fullpath 
     condition=!($pageUrl.include? "sign")#Sign in or Sign up page
@@ -153,25 +186,118 @@ body
     %>
     
     <div id="BGapp">
-      <%="welcome "+current_user[:email]%>
+      <div id="usernav"><font id="usernavtext"><%="welcome "+current_user[:email]%></font>
+      </div>
       <%= link_to "LOG OUT", logout_path , method: :delete,
         class: "button btn btn-secondary" , id:"logout" %>
       <%end%>
-      
+          <div class="d-none"> 
+            <div id="header" align='center' style="middle-align:center" >
+              <h2 style="position:relative;bottom:15px;left:0%;">
+              Actions
+              </h2>
+            </div>
+          </div> 
         <div class="siteNav">
           <% 
           @sites=Site.all
+          popover_index=0
           unless(current_user.nil?)
             user_id=current_user[:id]
             @sites.each do |site|
               if(site[:user_id]==user_id)  
+              popover_index+=1
               %>
-                
+              <style>  
+               
+                #popover-content<%=popover_index%>
+                {
+                    
+                position:relative;
+                top:-4px;
+                    
+                    
+
+                }
+
+
+
+
+
+              </style>  
+               <div class="d-none">
+                  <div id="popover-content<%=popover_index%>" align=center  >
+                          
+                    
+                  <%= button_to  'Update Link', edit_site_path(site), method: 'get',
+                  style:"position:relative;",class:"popover-btn btn btn-secondary"
+                  %>
+                  
+                  
+                  
+                  
+                      
+                      
+                          <button  style="height:20px" type="button" class="popover-btn btn btn-secondary">
+                              <font style="position:relative;top:-8px">
+                                  Scrap Website 
+                                  </font>
+                          </button>
+                      <br>
+                    
+                          <button style="height:20px" type="button" class="popover-btn btn btn-secondary">
+                              <font style="position:relative;top:-8px">
+                                  Modify Respository 
+                                  </font>
+                          </button>
+                          <br>
+                                  <button style="height:20px" type="button" class="popover-btn btn btn-secondary">
+                                      <font style="position:relative;top:-8px">
+                                      Set up Standby
+                                      </font>
+                                  </button>
+                              <br>
+                                  <%= button_to 'Delete Link', site_path(site), method: 'delete',
+                                  data: { confirm: "Voulez vous vraiment Supprimer le lien de #{site[:nom]} ?" },
+                                  class:"popover-btn btn btn-secondary" %>
+
+                                 
+                          
+                  </div>
+              </div>
+
                   <%= link_to site.nom, site_path(site) %>
-                  <%= button_to 'Modifier lien', edit_site_path(site), method: 'get'%>
-                  <%= button_to 'Supprimer lien', site_path(site), method: 'delete',
-                  data: { confirm: "Voulez vous vraiment Supprimer le lien de #{site[:nom]} ?" } %>
+                              <button data-placement="right" data-toggle="popover" data-container="body"
+                                type="button" data-html="true"  id="popover<%=popover_index%>" 
+                                class=" btn btn-secondary" 
+                                style="height:20px;position:relative;top:0px">
+                                    <font style="position:relative;top:-8px">  +  
+                                    </font>
+                             </button>
+                  
               <br>
+              <script>
+              $("#popover<%=popover_index%>").popover({
+                  html: true, 
+                  title : $('#header'),
+                content: $('#popover-content<%=popover_index%>'),
+                      
+              });                     
+
+              $(document).on
+              ('blur','.popover', 
+              function()
+              {
+                  
+              $(this).popover('hide');
+                  
+                                
+
+              }
+              );
+
+
+              </script>
               <%end%>
             <% end %>
           <%end%>

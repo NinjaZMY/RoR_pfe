@@ -445,9 +445,9 @@ height:44px;
 .siteNav
 {
 position:relative;
-
+top: 39px;
 left:0px;
-height:621px;
+height:630px;
 overflow-y:auto;
 border-width:4px;
 width:380px;
@@ -474,10 +474,28 @@ opacity: 0.7;
 
 #fragment
 {
-  position: absolute;
-  left:30%;
-  width:70%;
-  top:35%;
-  overflow-y:auto;
-  height: 432px;
+    position: absolute;
+    left: 29.5%;
+    width: 70%;
+    top: 41%;
+    overflow-y: auto;
+    height: 395px;
+}
+
+#usernav
+{
+background-color: gray;
+height: 39px;
+top: 0px;
+position: absolute;
+text-align: center;
+width: 380px;
+
+
+}
+
+#usernavtext
+{
+position: relative;
+top: 7.5px;
 }
