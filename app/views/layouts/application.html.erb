@@ -190,8 +190,7 @@ position:relative;
       </div>
       <%= link_to "LOG OUT", logout_path , method: :delete,
         class: "button btn btn-secondary" , id:"logout" %>
-      <%end%>
-          <div class="d-none"> 
+      <div class="d-none"> 
             <div id="header" align='center' style="middle-align:center" >
               <h2 style="position:relative;bottom:15px;left:0%;">
               Actions
@@ -259,7 +258,7 @@ position:relative;
                               <br>
                                   <%= button_to 'Delete Link', site_path(site), method: 'delete',
                                   data: { confirm: "Voulez vous vraiment Supprimer le lien de #{site[:nom]} ?" },
-                                  class:"popover-btn btn btn-secondary" %>
+                                  class:"popover-btn btn btn-dark"   %>
 
                                  
                           
@@ -297,7 +296,9 @@ position:relative;
               );
 
 
-              </script>
+              </script>    
+    <%end%>
+          
               <%end%>
             <% end %>
           <%end%>
