@@ -108,6 +108,7 @@ position:relative;
 }
 
 
+
 </style>
   <body >
     <%$pageUrl=request.original_fullpath 
@@ -227,7 +228,15 @@ position:relative;
                     
 
                 }
+                #popover<%=popover_index%>
+                {
+                
+                top:<%=(popover_index-1)*24+3%>px;
+                left:200px;
+                height:20px;
 
+
+                }
 
 
 
@@ -273,17 +282,17 @@ position:relative;
                           
                   </div>
               </div>
-
-                  <%= link_to site.nom, site_path(site) %>
+                                   
+                  <%= link_to site.nom, site_path(site) , class:"navlink" %>
                               <button data-placement="right" data-toggle="popover" data-container="body"
-                                type="button" data-html="true"  id="popover<%=popover_index%>" 
+                                type="button" data-html="true" style="position:absolute"  id="popover<%=popover_index%>" 
                                 class=" btn btn-secondary" 
                                 style="height:20px;position:relative;top:0px">
                                     <font style="position:relative;top:-8px">  +  
                                     </font>
                              </button>
-                  
-              <br>
+                  <br>
+              
               <script>
               $("#popover<%=popover_index%>").popover({
                   html: true, 
