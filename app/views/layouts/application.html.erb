@@ -36,6 +36,36 @@
   border-radius:50px 50px;
   width:50%;
 }
+  .linkForm
+  {
+  top:3%;	
+  width:27%;
+  left: 23.5%;
+  position: relative;
+  display: iniline;
+  opacity: 0.7	;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  border-color: gray;
+  }
+.app
+{
+position:absolute;
+top:18%;
+left:30%;
+
+}
+.input_new2
+{
+top : +160px ;
+
+}
+body
+{
+  margin:0;
+  padding:0;
+}
   </style>
   <body >
     <%$pageUrl=request.original_fullpath 
@@ -127,24 +157,26 @@
      <%= link_to "LOG OUT", logout_path , method: :delete,
       class: "button btn btn-secondary" , id:"logout" %>
     <%end%>
-    <table>
-      <% 
-      @sites=Site.all
-      unless(current_user.nil?)
-        user_id=current_user[:id]
-        @sites.each do |site|
-          if(site[:user_id]==user_id)  
-          %>
-            <tr>
-              <td><%= link_to site.nom, site_path(site) %></td>
-              <td><%= button_to 'Modifier lien', edit_site_path(site), method: 'get'%></td>
-              <td><%= button_to 'Supprimer lien', site_path(site), method: 'delete',
-              data: { confirm: "Voulez vous vraiment Supprimer le lien de #{site[:nom]} ?" } %></td>
-          
-          <%end%>
-        <% end %>
-      <%end%>
-    </table>
+    
+      <div class="siteNav">
+        <% 
+        @sites=Site.all
+        unless(current_user.nil?)
+          user_id=current_user[:id]
+          @sites.each do |site|
+            if(site[:user_id]==user_id)  
+            %>
+              
+                <%= link_to site.nom, site_path(site) %>
+                <%= button_to 'Modifier lien', edit_site_path(site), method: 'get'%>
+                <%= button_to 'Supprimer lien', site_path(site), method: 'delete',
+                data: { confirm: "Voulez vous vraiment Supprimer le lien de #{site[:nom]} ?" } %>
+            <br>
+            <%end%>
+          <% end %>
+        <%end%>
+      </div>        
+    
     <%= yield %>
 
   </body>
