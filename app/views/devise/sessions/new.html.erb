@@ -1,28 +1,66 @@
 <%= render file: 'app/views/sites'+$pageUrl.to_s, layout: false %>
 
-<h2>Log in</h2>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" align="center">
+      <div class="modal-header">
+        <h5 class="modal-title signin-title"  id="exampleModalLabel">Log in</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        
+          <%= f.label :email ,class:"modal-form" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"form-control form" %>
+        
+        
+        
+          <%= f.label :password ,class:"modal-form" %>
+          <%= f.password_field :password, autocomplete: "current-password",class:"form-control form" %>
+        
+        <br>
+        <% if devise_mapping.rememberable? %>
+          
+            <%= f.check_box :remember_me  %>
+            <%= f.label :remember_me %>
+          
+        <% end %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+          
+            <%= f.submit "Log in" , class:"btn btn-primary button" %>
+          
+        <% end %>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <%= render "devise/shared/links" , class:"hallo" %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
+</div>
 
-<%= render "devise/shared/links" %>
+
+<script>
+$('#exampleModal').modal('show');
+$('#exampleModal').on
+ ('hidden.bs.modal', function () 
+{
+ location.href="<%=$pageUrl%>"
+})
+document.getElementById('exampleModal').getElementsByTagName('a')[0].style="background-color:white;color:blue"
+</script>
+
+
+
+
+
+
+
+
+
+

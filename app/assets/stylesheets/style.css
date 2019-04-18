@@ -140,7 +140,7 @@
 
   #img3
   {
-  top:1950px;
+  top:1915px;
 
   }
 
@@ -171,7 +171,7 @@
   position: absolute;
   right:110px;
     
-  top: 3199px;
+  top: 3154px;
   font-size: 14px;
   color: lightgray;
   }
@@ -396,4 +396,18 @@ left: 435px;
 {
   top: -241px;
   left: 423px;
+}
+
+.signin-title
+{
+position: relative;
+left:200px;
+
+}
+
+.modal-form
+{
+position: relative;
+left: -156px;
+top: 38px;
 }
