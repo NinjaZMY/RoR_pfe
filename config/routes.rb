@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get "home3" => "sites#home3"
   get "home4" => "sites#home4"
   
-  root "sites#index"
+  root "sites#new"
 
 
 end
