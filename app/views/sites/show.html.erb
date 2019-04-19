@@ -3,8 +3,11 @@ site_id=params[:id];
 %>
 <%=site_id%>
 <%
-content=Fragment.where( site_id: site_id ).pluck('content')
-
+number=Fragment.where(site_id:site_id).length ;
+content=""
+for i in 1..number do
+content+=Fragment.where( site_id: site_id ).pluck('content').at(0) ;
+end
 %>
 
 
