@@ -1,6 +1,10 @@
 <%
-site_id=@site.id;
-content=Fragment.find_by( site_id: site_id ).content
+site_id=params[:id];
+%>
+<%=site_id%>
+<%
+content=Fragment.where( site_id: site_id ).pluck('content')
+
 %>
 
 
