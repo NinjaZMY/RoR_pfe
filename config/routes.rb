@@ -14,6 +14,6 @@ Rails.application.routes.draw do
   get "home4" => "sites#home4"
   get "sites" => "sites#new"
   root "sites#new"
-
+  get "scrap" => "sites#Scrap"
 
 end

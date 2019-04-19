@@ -10,9 +10,15 @@ class SitesController < ApplicationController
 
   end
 
+
+  def Scrap 
+  
+  end  
+
+
   def new
     @site = Site.new
-      
+     
   end
 
   def create
@@ -64,8 +70,6 @@ class SitesController < ApplicationController
     params.require(:site).permit(:nom, :url)
   end
 
-  
-
 
   def current_site
     @site = Site.find(params[:id])
@@ -91,6 +95,7 @@ class SitesController < ApplicationController
           redirect_to request.original_fullpath
           else
           #:nom , :url , :user_id
+          
           @user_id = current_user[:id] 
           @url = site_params[:url] 
           @nom = site_params[:nom]

@@ -256,7 +256,7 @@ position:relative;
                   
                       
                       
-                          <button  style="height:20px" type="button" class="popover-btn btn btn-secondary">
+                          <button  id="Scrap<%=popover_index%>"  style="height:20px" type="button" class="popover-btn btn btn-secondary">
                               <font style="position:relative;top:-8px">
                                   Scrap Website 
                                   </font>
@@ -285,7 +285,8 @@ position:relative;
               </div>
                                    
                   <%= link_to site.nom, site_path(site) , class:"navlink" %>
-                              <button data-placement="right" data-toggle="popover" data-container="body"
+                                                        
+                            <button data-placement="right" data-toggle="popover" data-container="body"
                                 type="button" data-html="true" style="position:absolute"  id="popover<%=popover_index%>" 
                                 class=" btn btn-secondary" 
                                 style="height:20px;position:relative;top:0px">
@@ -314,6 +315,21 @@ position:relative;
               }
               );
 
+
+              document.getElementById('Scrap<%=popover_index%>').onclick=function()
+              {
+                      
+                  <%$site_id=site.id%>
+                
+              
+              location.href='<%=scrap_path+'?'+$site_id.to_s%>';
+
+
+
+
+
+
+              }
 
               </script>    
     <%end%>

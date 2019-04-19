@@ -1,0 +1,15 @@
+<%
+url=request.original_fullpath; 
+index = url.index '?' 
+if(index.nil?)
+
+$site_id=Site.last.id;
+else
+$site_id=url[index+1, url.length ].to_i
+end
+%>
+
+
+<%@site=Site.find($site_id)%>
+<%= render file: 'app/views/sites/show', layout: false %>
+
