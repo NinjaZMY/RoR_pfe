@@ -1,4 +1,5 @@
 <%
+
 url=request.original_fullpath; 
 index = url.index '?' 
 if(index.nil?)
@@ -12,4 +13,21 @@ end
 
 <%@site=Site.find($site_id)%>
 <%= render file: 'app/views/sites/show', layout: false %>
+<div class="ScrapMethod">
+<form onsubmit="return false" >
+<input type="radio" name="extractionMethod" checked>
+extraction of the whole page 
+<input type="radio" name="extractionMethod" id="Scrap" >
+Extraction of page Scraps  
+<input type=submit value="Validate" class="btn btn-dark button">
+</form>
+</div>
 
+<script>
+
+
+
+
+
+
+</script>

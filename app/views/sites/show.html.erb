@@ -1,131 +1,140 @@
-<%
-site_id=@site.id;
+<%if ($e!="")
 %>
 
-<%
-number=Fragment.where(site_id:site_id).length ;
-content=""
-for i in 1..number do
-content+=Fragment.where( site_id: site_id ).pluck('content').at(0) ;
-end
-%>
+<script>
+location.href="<%=$url%>";
+</script>
+<%else%>
+
+    <%
+    site_id=@site.id;
+    %>
+
+    <%
+    number=Fragment.where(site_id:site_id).length ;
+    content=""
+    for i in 1..number do
+    content+=Fragment.where( site_id: site_id ).pluck('content').at(0) ;
+    end
+    %>
 
 
 
 
-<body  >
-<div class='Connexion_Problem'>
-<h1><%= @site.nom %></h1>
-<h4>"<%= @site.url %>"</h4>
-<br>
- <textarea>
- <%= raw content %>
- </textarea>
- <br>
-<%= link_to 'Modifier Lien',edit_site_path(@site), method: 'get' %>
-<%= link_to 'Supprimer Lien', @site, method: :delete, data: 
- { confirm: "Voulez vous vraiment Supprimer le lien de #{@site[:nom]} ?" } %>
- </div>
+    <body  >
+    <div class='Connexion_Problem'>
+    <h1><%= @site.nom %></h1>
+    <h4>"<%= @site.url %>"</h4>
+    <br>
+    <textarea>
+    <%= raw content %>
+    </textarea>
+    <br>
+    <%= link_to 'Modifier Lien',edit_site_path(@site), method: 'get' %>
+    <%= link_to 'Supprimer Lien', @site, method: :delete, data: 
+    { confirm: "Voulez vous vraiment Supprimer le lien de #{@site[:nom]} ?" } %>
+    </div>
 
 
 
 
-  <script> 
- 
-
-function loadPage()
-{
-z=document.getElementById('fragment').innerHTML; 
-src="<%=@site.url%>";
-console.log(src);
-//src is the page that contains the data z
-//méllowél na3mél traitement nslah l src 
-z=Absolute(z,"src=",src)
-// houni 3ana z mrigél fel src , donc nwaliw n5dmou 3al href 
-z=Absolute(z,"href=",src)
-// houni y9o3déna fazét el content
-z=Absolute(z,"content=",src)
-//houni 3anna z jawou mrigél pha bi 7ayfu
-document.getElementById('fragment').innerHTML=z;
-//exemple: x='<script async="" src="https://secure.quantserve.com/quant.js">'
-// y ="src="
-    function Absolute(x,y,src)
-    {
+    <script> 
     
-    i=x.indexOf(y);
-        if(i==-1)
-        {
-        return x
-        }
-        else
-        {
-        i+=+y.length;
-        pointer=x[i]; // pointer can be either "" or ''
-        beforeLink=x.substr(0,i+1);
-        x=x.substr(i+1,x.length);//copies from the start of the link to the end of x
-        k=x.indexOf(pointer);// k is the index of the end of link ,
-        // k is the index referencing to the end pointer
-        s=0// s is the index referencing the start of the link
-        link=x.substr(s,k)
-        is_absolute=(link.indexOf('//')==0);
-        
-        srcURL=new URL(src);
-        src=srcURL.href;            
-            if(is_absolute)
-            {
-            link=srcURL.protocol+link;  
-            }
-        firstLinkChar=link[0];
-        srcBase=srcURL.origin;
-        if(firstLinkChar=='/')
-        {
-         link= srcBase+link;  
-        }
 
-        condition=link.indexOf('http://') * link.indexOf('https://')  //-1-*1==1
-        is_local=(link.indexOf('http://localhost')!=-1);
+    function loadPage()
+    {
+    z=document.getElementById('fragment').innerHTML; 
+    src="<%=@site.url%>";
+    console.log(src);
+    //src is the page that contains the data z
+    //méllowél na3mél traitement nslah l src 
+    z=Absolute(z,"src=",src)
+    // houni 3ana z mrigél fel src , donc nwaliw n5dmou 3al href 
+    z=Absolute(z,"href=",src)
+    // houni y9o3déna fazét el content
+    z=Absolute(z,"content=",src)
+    //houni 3anna z jawou mrigél pha bi 7ayfu
+    document.getElementById('fragment').innerHTML=z;
+    //exemple: x='<script async="" src="https://secure.quantserve.com/quant.js">'
+    // y ="src="
+        function Absolute(x,y,src)
+        {
         
-            if ( (condition==1 && !is_absolute) || (is_local) ) // link is a relative link
+        i=x.indexOf(y);
+            if(i==-1)
             {
-                if(is_local)
+            return x
+            }
+            else
+            {
+            i+=+y.length;
+            pointer=x[i]; // pointer can be either "" or ''
+            beforeLink=x.substr(0,i+1);
+            x=x.substr(i+1,x.length);//copies from the start of the link to the end of x
+            k=x.indexOf(pointer);// k is the index of the end of link ,
+            // k is the index referencing to the end pointer
+            s=0// s is the index referencing the start of the link
+            link=x.substr(s,k)
+            is_absolute=(link.indexOf('//')==0);
+            
+            srcURL=new URL(src);
+            src=srcURL.href;            
+                if(is_absolute)
                 {
-                link = new URL(link);
-                link=link.pathname;
-   
+                link=srcURL.protocol+link;  
+                }
+            firstLinkChar=link[0];
+            srcBase=srcURL.origin;
+            if(firstLinkChar=='/')
+            {
+            link= srcBase+link;  
+            }
+
+            condition=link.indexOf('http://') * link.indexOf('https://')  //-1-*1==1
+            is_local=(link.indexOf('http://localhost')!=-1);
+            
+                if ( (condition==1 && !is_absolute) || (is_local) ) // link is a relative link
+                {
+                    if(is_local)
+                    {
+                    link = new URL(link);
+                    link=link.pathname;
+    
+                    }
+                
+                
+                
+                is_A_DirectLink=(firstLinkChar!='/');
+                    if(is_A_DirectLink)
+                    {
+                    link='/'+link;
+                    }                           
+                link=srcBase+link;
+                link=new URL(link).href;
                 }
             
-            
-            
-            is_A_DirectLink=(firstLinkChar!='/');
-                if(is_A_DirectLink)
-                {
-                link='/'+link;
-                }                           
-            link=srcBase+link;
-            link=new URL(link).href;
+            x=x.substr(k,x.length) // contains the string that goes right after the link
+            console.log('link : '+link);
+            return beforeLink+link+Absolute(x,y,src)
             }
-        
-        x=x.substr(k,x.length) // contains the string that goes right after the link
-        console.log('link : '+link);
-        return beforeLink+link+Absolute(x,y,src)
+
         }
 
     }
 
-}
 
+    </script>
+    <div id=fragment >    <%=raw content%>
 
- </script>
-<div id=fragment >    <%=raw content%>
+    </div>
 
-</div>
+    <script>
 
-<script>
+    loadPage()
+    </script>
 
-loadPage()
-</script>
-
-</body>
+    </body>
+<%end%>
 
 
 

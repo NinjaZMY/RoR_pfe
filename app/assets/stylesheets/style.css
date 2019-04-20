@@ -468,7 +468,8 @@ opacity: 0.7;
 .Connexion_Problem
 {
   position: absolute; 
-  left : 31%;
+  left: 23%;
+  color:darkgray;
   top:0;
 }
 
@@ -516,4 +517,21 @@ color:midnightblue;
 height:17px;
 position:relative;
 top:-4px;
+}
+
+.ScrapMethod
+{
+font-size: 20px;
+position: absolute;
+top: 16%;
+left: 47%;
+color: cornsilk;
+}
+
+.Connexion_error
+{
+top: 18px;
+left: 49%;
+color: white;
+position:absolute;
 }

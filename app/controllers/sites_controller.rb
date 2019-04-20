@@ -18,7 +18,7 @@ class SitesController < ApplicationController
 
   def new
     @site = Site.new
-     
+    $site_id=@site.id 
   end
 
   def create
@@ -55,8 +55,12 @@ class SitesController < ApplicationController
       :user_id => @user_id)
     Fragment.where(site_id:params[:id]).update(:site_id => params[:id] , 
       :length => 1 , :ordre => 1   , :content => $content)
-    redirect_to site_path(@site)
-    
+    if(@site.class==Array)
+    $url= site_path(@site)
+    else
+    $url= request.original_url  
+    end
+  redirect_to $url  
   end
 
   def destroy
@@ -75,6 +79,7 @@ class SitesController < ApplicationController
     @site = Site.find(params[:id])
   end
 
+  
   def Before_Create_Update
     begin
         $e=""#connected
@@ -83,7 +88,7 @@ class SitesController < ApplicationController
       end     
         
         if ($e!="")
-        redirect_to request.original_fullpath
+        redirect_to request.original_url
         else
           begin
           $e=""#connected
@@ -92,7 +97,7 @@ class SitesController < ApplicationController
           end     
           
           if ($e!="") #not connected
-          redirect_to request.original_fullpath
+          redirect_to request.original_url
           else
           #:nom , :url , :user_id
           
@@ -124,6 +129,6 @@ class SitesController < ApplicationController
 
 
 
-
+ helper_method :Before_Create_Update
 
 end
