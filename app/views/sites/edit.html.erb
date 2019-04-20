@@ -1,10 +1,8 @@
 <%= render file: 'app/views/sites/connexion', layout: false %>
 
 <%
-if ($e!="")
+if ($e=="") 
 %>
- <h1 class='Connexion_Problem'>Connection State : <%=$e%></h1>
-<%else%>
 
   <%= form_with model: @site do |form| %>
     <%= form.text_field :nom, placeholder: "Link Name",

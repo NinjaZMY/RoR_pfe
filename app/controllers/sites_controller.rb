@@ -1,7 +1,10 @@
 require 'open-uri'
 class SitesController < ApplicationController
   before_action :current_site, only: [:show, :edit, :update, :destroy]
-  before_action :Before_Create_Update , only: [:create,:update]
+  before_action -> {Before_Create_Update()} ,  only: [:create,:update] 
+    
+                                          
+
   def index
     @sites = Site.all
   end
@@ -27,7 +30,7 @@ class SitesController < ApplicationController
   
     #:nom , :url , :user_id
     
-    site = Site.create(:nom => @nom , :url => @url ,
+    site = Site.create(:nom => @nom , :url => @site_url ,
       :user_id => @user_id )
     # do the next thing
       
@@ -46,12 +49,12 @@ class SitesController < ApplicationController
   end
 
   def edit
-
+    
   end
 
   def update
     
-    @site=Site.where(id:params[:id]).update(:nom => @nom , :url => @url ,
+    @site=Site.where(id:params[:id]).update(:nom => @nom , :url => @site_url ,
       :user_id => @user_id)
     Fragment.where(site_id:params[:id]).update(:site_id => params[:id] , 
       :length => 1 , :ordre => 1   , :content => $content)
@@ -92,7 +95,8 @@ class SitesController < ApplicationController
         else
           begin
           $e=""#connected
-          content = Nokogiri::HTML(open(site_params[:url]))
+          site_url=site_params[:url]
+          content = Nokogiri::HTML(open(site_url))
           rescue Exception => $e
           end     
           
@@ -102,7 +106,7 @@ class SitesController < ApplicationController
           #:nom , :url , :user_id
           
           @user_id = current_user[:id] 
-          @url = site_params[:url] 
+          @site_url = site_url
           @nom = site_params[:nom]
           # do the next thing
           $content=content.to_s  
@@ -130,5 +134,5 @@ class SitesController < ApplicationController
 
 
  helper_method :Before_Create_Update
-
+ helper_method :site_params 
 end
