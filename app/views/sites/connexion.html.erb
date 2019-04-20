@@ -1,0 +1,14 @@
+<%
+if ($e!="")
+%>
+
+ <h1 class='Connexion_Problem'> Connection State : <h6 class='Connexion_error'><%=$e%></h6></h1>
+<%end%> 
+<%
+begin
+      $e=""#connected
+      connexion = Nokogiri::HTML(open('https://www.google.com/'))
+      rescue Exception => $e
+end     
+        
+%>        

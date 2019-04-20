@@ -15,5 +15,5 @@ Rails.application.routes.draw do
   get "sites" => "sites#new"
   root "sites#new"
   get "scrap" => "sites#Scrap"
-
+  get "connexion" => "sites#connexion"
 end
