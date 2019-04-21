@@ -9,7 +9,7 @@ $site_id=Site.last.id;
 else
 $site_id=url[index+1, url.length ].to_i
 end
-
+site=Site.find($site_id)
 url=Site.find($site_id).url
 
 
@@ -37,7 +37,7 @@ time=Time.now.strftime("%d/%m/%Y %H:%M");
     <%@site=Site.find($site_id)%>
     <%= render file: 'app/views/sites/show', layout: false %>
     <div class="ScrapMethod">
-    <form onsubmit="return false" >
+    <form name=Sform  >
     <input type="radio" name="extractionMethod" checked>
     extraction of the whole page 
     <input type="radio" name="extractionMethod" id="Scrap" >
@@ -48,8 +48,34 @@ time=Time.now.strftime("%d/%m/%Y %H:%M");
 
     <script>
 
+    Sform=document.forms.Sform;
+    checkbox=Sform.extractionMethod;
 
+    Sform.onsubmit=function()
+    {
 
+    Scrap();
+
+    return false;
+    }
+
+    function Scrap()
+    {
+    i=1;
+    x="fragment";
+    if(checkbox[0].checked)
+    {
+        
+        i=0;
+        x="whole page";
+        location.href="<%=site_path(site)%>";
+    }    
+    
+    alert("Extraction Method : "+x) ;
+    
+    
+
+    }
 
 
 
