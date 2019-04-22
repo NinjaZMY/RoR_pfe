@@ -131,17 +131,17 @@ time=Time.now.strftime("%d/%m/%Y %H:%M");
     function Scrap()
     {
     j=1;
-    x="fragment";
+    //x="fragment";
         if(radio[0].checked)
         {
             
             j=0;
-            x="whole page";
+            //x="whole page";
             location.href="<%=site_path(site)%>";
         }    
     
     alert('you have '+i+' fragments ');
-        if(i!=0)
+        if( (i!=0) && (j==1) )
         {
          form.submit();
         }
