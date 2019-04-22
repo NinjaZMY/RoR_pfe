@@ -7,22 +7,21 @@ index = url.index '?'
 
 $site_id=Site.last.id;
 unless(index.nil?)
-url=[index+1, url.length ]    
+url=url[index+1, url.length ].to_s    
 is_a_number=true
-    for i in 0..(url.length-1) do 
-    index1 = number.index url[i].to_s    
-        if(index1.nil?)
-        is_a_number=false;
-        end    
-    end     
+Integer url rescue is_a_number=false
+
     if(is_a_number==true)
 
     
         
        
-    $site_id=url[index+1, url.length ].to_i
+    $site_id=url
     end 
 end
+%>
+<%="url = "+url%>
+<%
 site=Site.find($site_id)
 url=Site.find($site_id).url
 
