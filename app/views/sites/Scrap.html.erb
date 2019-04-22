@@ -20,7 +20,7 @@ Integer url rescue is_a_number=false
     end 
 end
 %>
-<%="url = "+url%>
+<%="params = "+params.to_s%>
 <%
 site=Site.find($site_id)
 url=Site.find($site_id).url
@@ -55,12 +55,14 @@ time=Time.now.strftime("%d/%m/%Y %H:%M");
         <input type="radio" name="extractionMethod" id="Scrap" >
         Extraction of page Scraps  
         
-            <form name=Sform  action="<%=scrap_path%>" >
+            <%= form_tag scrap_path, name:"Sform"  , method: :post do %>
+            
             <input type=submit value="Validate" class="btn btn-dark button">    
-                <div id="Sform">
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>    
+            <div id="Sform">
 
                 </div>
-            </form>
+            <%end%>
     </div>
 
     <script>

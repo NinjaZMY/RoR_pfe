@@ -16,6 +16,7 @@ class SitesController < ApplicationController
 
   def Scrap 
   
+    
   end  
 
 
