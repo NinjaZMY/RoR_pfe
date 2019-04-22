@@ -1,13 +1,27 @@
 
 <%
-
+number="0123456789"
 url=request.original_fullpath; 
 index = url.index '?' 
-if(index.nil?)
+
 
 $site_id=Site.last.id;
-else
-$site_id=url[index+1, url.length ].to_i
+unless(index.nil?)
+url=[index+1, url.length ]    
+is_a_number=true
+    for i in 0..(url.length-1) do 
+    index1 = number.index url[i].to_s    
+        if(index1.nil?)
+        is_a_number=false;
+        end    
+    end     
+    if(is_a_number==true)
+
+    
+        
+       
+    $site_id=url[index+1, url.length ].to_i
+    end 
 end
 site=Site.find($site_id)
 url=Site.find($site_id).url
