@@ -37,43 +37,114 @@ time=Time.now.strftime("%d/%m/%Y %H:%M");
     <%@site=Site.find($site_id)%>
     <%= render file: 'app/views/sites/show', layout: false %>
     <div class="ScrapMethod">
-    <form name=Sform  >
-    <input type="radio" name="extractionMethod" checked>
-    extraction of the whole page 
-    <input type="radio" name="extractionMethod" id="Scrap" >
-    Extraction of page Scraps  
-    <input type=submit value="Validate" class="btn btn-dark button">
-    </form>
+        <input type="radio" name="extractionMethod" checked>
+        extraction of the whole page 
+        <input type="radio" name="extractionMethod" id="Scrap" >
+        Extraction of page Scraps  
+        
+            <form name=Sform  action="<%=scrap_path%>" >
+            <input type=submit value="Validate" class="btn btn-dark button">    
+                <div id="Sform">
+
+                </div>
+            </form>
     </div>
 
     <script>
+    pageFragment=document.getElementById('fragment');
+    FragmentContainer=Sform[1];
+    form=document.forms.Sform;
+    radio=document.getElementsByClassName('ScrapMethod')[0].getElementsByTagName('input');
+    //Script mta3 extraction de données dans une page web ;
+    i=0;var t=[] ;
+    //x=document.documentElement.getElementsByTagName('head')[0];
+    //x=x.outerHTML;
+    y="<div id=Separator></div>";
+    containerHTML="<div id='container'></div>";
 
-    Sform=document.forms.Sform;
-    checkbox=Sform.extractionMethod;
+    page=pageFragment.innerHTML;
+    pageFragment.innerHTML=containerHTML+y+page;
+    //t[0]=z
+    z="";
+    radio[1].onclick=function()
+    {
 
-    Sform.onsubmit=function()
+        pageFragment.onclick= function(e) 
+        {   
+            
+            e = e || window.event;
+            var target = e.target.parentNode;
+            //console.log("e = "+e.outerHTML+" e.srcElement = "+target.outerHTML);
+            text = target.outerHTML ;
+            containsSeparator=text.indexOf(document.getElementById('Separator').outerHTML);
+            containsContainer=text.indexOf(document.getElementById('container').outerHTML);
+            alert(text); 
+
+            if(z.indexOf(text)==-1 && containsSeparator==-1 && containsContainer==-1)
+            {
+            container.innerHTML="";
+            z+=text;
+            t[i]=text;
+            Separator=document.getElementById('Separator');
+                if(Separator.innerText=="")
+                {
+                Separator.innerHTML="<hr><h2> voici le reste du site </h2> ";
+                
+                }
+        
+                
+            containerHTML="<h1> ci-dessous les informations scrappés </h1>";
+            container=document.getElementById('container');
+            container.innerHTML=containerHTML;
+            target.outerHTML='';
+            container.innerHTML+=z;
+            FragmentContainer.innerHTML+="<textarea class='d-none' name=fragment[content["+i+"]]>"+t[i]+"</textarea>"
+            
+            
+            
+            i++
+
+            }
+        console.log(z);
+
+        };
+        /*
+        trécupéri el target : détéction de fragments à écouter
+        */
+    }
+    radio[0].onclick=function()
+    {
+    pageFragment.onclick= null;
+                                            
+    alert('disabling the fragment function');
+
+    }
+
+    form.onsubmit=function()
     {
 
     Scrap();
-
     return false;
+    
     }
 
     function Scrap()
     {
-    i=1;
+    j=1;
     x="fragment";
-    if(checkbox[0].checked)
-    {
-        
-        i=0;
-        x="whole page";
-        location.href="<%=site_path(site)%>";
-    }    
+        if(radio[0].checked)
+        {
+            
+            j=0;
+            x="whole page";
+            location.href="<%=site_path(site)%>";
+        }    
     
-    alert("Extraction Method : "+x) ;
-    
-    
+    alert('you have '+i+' fragments ');
+        if(i!=0)
+        {
+         form.submit();
+        }
 
     }
 

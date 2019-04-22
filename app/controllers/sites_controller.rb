@@ -131,8 +131,6 @@ class SitesController < ApplicationController
 
 
 
-
-
  helper_method :Before_Create_Update
  helper_method :site_params 
 end
