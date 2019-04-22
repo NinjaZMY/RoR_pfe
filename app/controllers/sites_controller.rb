@@ -15,7 +15,24 @@ class SitesController < ApplicationController
 
 
   def Scrap 
-  
+    if request.post?
+    Fragment.where(site_id:$site_id).destroy_all
+    length=params[:length].to_i  
+      for i in 0..(length-1) do
+      #@site
+      #$site_id
+      index=i.to_s
+      @fragment=params[:fragment][index]
+      ordre=i+1;
+        
+      Fragment.create(:site_id => $site_id , 
+      :length => length , :ordre => ordre   , :content => @fragment)
+        
+      end 
+      site=Site.find($site_id)
+    redirect_to site_path(site)
+
+    end  
     
   end  
 

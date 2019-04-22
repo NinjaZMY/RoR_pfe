@@ -14,7 +14,7 @@ location.href="<%=$url%>";
     number=Fragment.where(site_id:site_id).length ;
     content=""
     for i in 1..number do
-    content+=Fragment.where( site_id: site_id ).pluck('content').at(0) ;
+    content+=Fragment.where( site_id: site_id )[i-1].content;
     end
     %>
 
