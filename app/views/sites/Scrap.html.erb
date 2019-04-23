@@ -40,7 +40,10 @@ if ($e!="")
         location.href='<%=root_path%>';
     </script>
 <%else
+@head=$content.search('head')[0].to_html
+%>
 
+<%
 time=Time.now.strftime("%d/%m/%Y %H:%M");
 
 
@@ -62,8 +65,8 @@ time=Time.now.strftime("%d/%m/%Y %H:%M");
             <input type=submit value="Validate" class="btn btn-dark button">    
             <%= hidden_field_tag :authenticity_token, form_authenticity_token %>    
             <div id="Sform">
-
-                </div>
+            <textarea class='d-none' name="fragment[0]"><%=@head.to_s%></textarea>
+            </div>
             <%end%>
     </div>
 
@@ -73,7 +76,7 @@ time=Time.now.strftime("%d/%m/%Y %H:%M");
     form=document.forms.Sform;
     radio=document.getElementsByClassName('ScrapMethod')[0].getElementsByTagName('input');
     //Script mta3 extraction de données dans une page web ;
-    i=0;var t=[] ;
+    i=1;var t=[] ;
     //x=document.documentElement.getElementsByTagName('head')[0];
     //x=x.outerHTML;
     y="<div id=Separator></div>";
@@ -81,7 +84,9 @@ time=Time.now.strftime("%d/%m/%Y %H:%M");
 
     page=pageFragment.innerHTML;
     pageFragment.innerHTML=containerHTML+y+page;
-    //t[0]=z
+    //t[0]=''
+    ;
+
     z="";
     radio[1].onclick=function()
     {

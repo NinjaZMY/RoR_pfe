@@ -2,12 +2,16 @@
 %>
 
 <script>
-location.href="<%=$url%>";
+location.href="<%=root_path%>";
 </script>
 <%else%>
 
     <%
-    site_id=@site.id;
+    if(params[:id].nil?)
+    site_id=$site_id    
+    else    
+    site_id=params[:id];
+    end
     %>
 
     <%
