@@ -39,7 +39,7 @@ class SitesController < ApplicationController
 
   def new
     @site = Site.new
-    $site_id=@site.id 
+    
   end
 
   def create

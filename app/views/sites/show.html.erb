@@ -7,18 +7,17 @@ location.href="<%=root_path%>";
 <%else%>
 
     <%
-    if(params[:id].nil?)
-    site_id=$site_id    
-    else    
-    site_id=params[:id];
+    unless(params[:id].nil?)
+     
+    $site_id=params[:id];
     end
     %>
 
     <%
-    number=Fragment.where(site_id:site_id).length ;
+    number=Fragment.where(site_id:$site_id).length ;
     content=""
     for i in 1..number do
-    content+=Fragment.where( site_id: site_id )[i-1].content;
+    content+=Fragment.where( site_id: $site_id )[i-1].content;
     end
     %>
 
@@ -136,7 +135,7 @@ location.href="<%=root_path%>";
 
     loadPage()
     </script>
-
+    <%="$site_id : "+$site_id%>
     </body>
 <%end%>
 

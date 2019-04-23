@@ -319,10 +319,9 @@ position:relative;
               document.getElementById('Scrap<%=popover_index%>').onclick=function()
               {
                       
-                  <%$site_id=site.id%>
                 
               
-              location.href='<%=scrap_path+'?'+$site_id.to_s%>';
+              location.href='<%=scrap_path+'?'+site.id.to_s%>';
 
 
 
