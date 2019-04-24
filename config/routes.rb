@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   get "scrap" => "sites#Scrap"
   post "scrap" => "sites#Scrap"
   get "connexion" => "sites#connexion"
+  get "move" => "sites#move"
 end

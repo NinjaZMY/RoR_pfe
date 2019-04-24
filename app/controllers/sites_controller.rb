@@ -49,7 +49,7 @@ class SitesController < ApplicationController
     #:nom , :url , :user_id
     
     site = Site.create(:nom => @nom , :url => @site_url ,
-      :user_id => @user_id )
+      :user_id => @user_id , :respository_id=> 1 )
     # do the next thing
       
 

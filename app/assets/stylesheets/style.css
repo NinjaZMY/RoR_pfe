@@ -557,3 +557,16 @@ color:white;
   position: relative;
   left: 10px;
 }
+
+.navDiv
+{
+    height: 0px;
+    width: 900px;
+    line-height: 1;
+}
+
+.FolderDiv
+{
+width:900px;
+height: 0px;
+}

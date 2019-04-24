@@ -210,7 +210,8 @@ position:relative;
           </div> 
         <div class="siteNav">
           <% 
-          @sites=Site.all
+          @sites= Site.order(:respository_id)
+
           popover_index=0
           relativePosition=0
           directories="" 
@@ -233,8 +234,10 @@ position:relative;
                 directories+=@respository
                 relativePosition+=22
               %>
+              <div class="FolderDiv">  
               <img  src="<%=request.base_url%>/assets/folder_icon.jpg" class="Respository" width=23 height=16>
               <b><%=@respository%></b>
+              </div>
               <br>
               
               <%
@@ -305,9 +308,9 @@ position:relative;
                           
                   </div>
               </div>
-                                   
+                  <div class="navDiv">                 
                   <%= link_to site.nom, site_path(site) , class:"navlink "+@FolderClass+"" %>
-                                                        
+                  </div>                                      
                             <button data-placement="right" data-toggle="popover" data-container="body"
                                 type="button" data-html="true" style="position:absolute"  id="popover<%=popover_index%>" 
                                 class=" btn btn-secondary" 
