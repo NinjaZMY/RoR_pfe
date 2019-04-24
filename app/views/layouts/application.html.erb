@@ -212,15 +212,17 @@ position:relative;
           <% 
           @sites=Site.all
           popover_index=0
+          relativePosition=0
+          directories="" 
+
           unless(current_user.nil?)
             user_id=current_user[:id]
             @sites.each do |site|
               if(site[:user_id]==user_id)  
               popover_index+=1
-              relativePosition=0
               @site = site 
               @respository=site.Respository;
-              @FolderClass=""  
+              @FolderClass="" 
               if(@respository!="")
                 @FolderClass="InsideFolder"
                 relativePosition+=22
