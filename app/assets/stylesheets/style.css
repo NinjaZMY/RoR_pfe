@@ -542,3 +542,18 @@ color:white;
 
 
 }
+
+.Respository
+{
+
+
+  bottom: 2px;
+  position: relative;
+
+}
+
+.InsideFolder
+{
+  position: relative;
+  left: 10px;
+}

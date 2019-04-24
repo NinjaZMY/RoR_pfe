@@ -217,6 +217,20 @@ position:relative;
             @sites.each do |site|
               if(site[:user_id]==user_id)  
               popover_index+=1
+              relativePosition=0
+              @site = site 
+              @respository=site.Respository;
+              @FolderClass=""  
+              if(@respository!="")
+                @FolderClass="InsideFolder"
+                relativePosition+=22
+              %>
+              <img  src="<%=request.base_url%>/assets/folder_icon.jpg" class="Respository" width=23 height=16>
+              <b><%=@respository%></b>
+              <br>
+              
+              <%
+              end  
               %>
               <style>  
                
@@ -232,7 +246,7 @@ position:relative;
                 #popover<%=popover_index%>
                 {
                 
-                top:<%=(popover_index-1)*24+3%>px;
+                top:<%=(popover_index-1)*24+3+relativePosition%>px;
                 left:200px;
                 height:20px;
 
@@ -284,7 +298,7 @@ position:relative;
                   </div>
               </div>
                                    
-                  <%= link_to site.nom, site_path(site) , class:"navlink" %>
+                  <%= link_to site.nom, site_path(site) , class:"navlink "+@FolderClass+"" %>
                                                         
                             <button data-placement="right" data-toggle="popover" data-container="body"
                                 type="button" data-html="true" style="position:absolute"  id="popover<%=popover_index%>" 
@@ -336,8 +350,9 @@ position:relative;
               <%end%>
             <% end %>
           <%end%>
-        </div>        
-    </div>
+
+        </div>        <!-- <- siteNav -->
+    </div> <!-- <- BGapp -->
     <%= yield %>
 
   </body>
