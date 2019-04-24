@@ -221,13 +221,13 @@ position:relative;
               if(site[:user_id]==user_id)  
               popover_index+=1
               @site = site 
-              @respository=""
+              @respository=Respository.find(@site.respository_id).label
               #@respository=site.Respository;
               @FolderClass="" 
-              #distinct = directories.index @respository
-              #if(distinct!=0) # respository!=""
-              #@FolderClass="InsideFolder"  
-              #end  
+              distinct = directories.index @respository
+              if(@respository!="") # respository!=""
+              @FolderClass="InsideFolder"  
+              end  
               if(@respository!=""&&distinct==nil)
                 
                 directories+=@respository
