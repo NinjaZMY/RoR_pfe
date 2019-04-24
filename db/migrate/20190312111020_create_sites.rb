@@ -5,7 +5,7 @@ class CreateSites < ActiveRecord::Migration[5.2]
       t.string :url
       
       t.integer :time_to_watch ,              null: false, default: 0
-      t.string :Respository ,              null: false, default: ""
+      
       t.integer :Notification_Number
       
 

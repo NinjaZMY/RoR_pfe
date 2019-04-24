@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_16_183355) do
+ActiveRecord::Schema.define(version: 2019_04_24_143709) do
 
   create_table "fragments", force: :cascade do |t|
     t.integer "ordre"
@@ -20,6 +20,12 @@ ActiveRecord::Schema.define(version: 2019_04_16_183355) do
     t.datetime "updated_at", null: false
     t.integer "site_id"
     t.index ["site_id"], name: "index_fragments_on_site_id"
+  end
+
+  create_table "respositories", force: :cascade do |t|
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sites", force: :cascade do |t|
@@ -32,6 +38,8 @@ ActiveRecord::Schema.define(version: 2019_04_16_183355) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.integer "respository_id"
+    t.index ["respository_id"], name: "index_sites_on_respository_id"
     t.index ["user_id"], name: "index_sites_on_user_id"
   end
 
