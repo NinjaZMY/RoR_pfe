@@ -223,8 +223,13 @@ position:relative;
               @site = site 
               @respository=site.Respository;
               @FolderClass="" 
-              if(@respository!="")
-                @FolderClass="InsideFolder"
+              distinct = directories.index @respository
+              if(distinct!=0) # respository!=""
+              @FolderClass="InsideFolder"  
+              end  
+              if(@respository!=""&&distinct==nil)
+                
+                directories+=@respository
                 relativePosition+=22
               %>
               <img  src="<%=request.base_url%>/assets/folder_icon.jpg" class="Respository" width=23 height=16>
