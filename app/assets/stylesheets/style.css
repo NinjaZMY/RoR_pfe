@@ -403,13 +403,13 @@ top: 38px;
 #logout
 {
   
-  background-color: black;
-  position: absolute;
-  width: 10%;
-  right: 140px;
-  top: 160px;
-  font-size: 20px;
-  font-weight: bold;
+background-color: black;
+position: absolute;
+width: 10%;
+right: 38px;
+top: 46px;
+font-size: 20px;
+font-weight: bold;
 
 }
 
@@ -569,4 +569,30 @@ color:white;
 {
 width:900px;
 height: 0px;
+}
+
+.RespositoryNav
+{
+position: absolute;
+top: 44px;
+left: 258px;
+width: 57.86%;
+}
+
+.RespositoryAction
+{
+color: cadetblue;
+}
+
+.RespositoryList
+{
+position: absolute;
+top: 85px;
+left: 258px;
+color: honeydew;
+background-color: lightslategray;
+opacity: 0.7;
+width: 58%;
+height: 584px;
+overflow-y: auto;
 }

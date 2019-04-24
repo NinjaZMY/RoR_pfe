@@ -1,0 +1,33 @@
+<nav class="nav nav-pills flex-column flex-sm-row RespositoryNav">
+  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction  btn btn-outline-light " href="#">Add Folder</a>
+  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light " href="#">Move</a>
+  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light " href="#">Delete</a>
+  
+</nav>
+<div class="RespositoryList">
+<%
+respositories=Respository.all
+respositories.each do |respository| 
+label=respository.label 
+    if (label!="")    
+    %>
+        <div class="FolderDiv">  
+        <img  src="<%=request.base_url%>/assets/folder_icon.jpg" class="Respository" width=23 height=16>
+        <b><%=label%></b>
+        </div>
+     <br>
+
+
+
+    <%
+    end        
+end     
+links=Site.all.where(respository_id:1)
+links.each do |site|
+%>
+<%=site.nom%>
+<br>
+<%
+end    
+%>
+</div>
