@@ -596,3 +596,9 @@ width: 58%;
 height: 584px;
 overflow-y: auto;
 }
+
+.InsideFolder2
+{
+  position:relative;
+  left:25px;
+}

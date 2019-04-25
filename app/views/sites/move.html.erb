@@ -6,28 +6,64 @@
 </nav>
 <div class="RespositoryList">
 <%
-respositories=Respository.all
-respositories.each do |respository| 
-label=respository.label 
-    if (label!="")    
+url=request.original_fullpath
+
+
+
+if(url=="/move")
+    respositories=Respository.all
+    respositories.each do |respository| 
+    label=respository.label 
+        if (label!="")    
+        %>
+            <div class="FolderDiv">  
+            <img  src="<%=request.base_url%>/assets/folder_icon.jpg" class="Respository" width=23 height=16>
+            <b><%=label%></b>
+            </div>
+        <br>
+
+
+
+        <%
+        end        
+    end     
+    links=Site.all.where(respository_id:1)
+    links.each do |site|
     %>
+    <%=site.nom%>
+    <br>
+    <%
+    end 
+else
+    index=url.index '?'
+    url=url[index+1,url.length]
+    #decoded =url  
+        #begin
+        #decoded = URI.decode(decoded) 
+        #end while(decoded != URI.decode(decoded)  )
+    id_respository=url.to_i
+    label=Respository.find(id_respository).label
+%>
         <div class="FolderDiv">  
         <img  src="<%=request.base_url%>/assets/folder_icon.jpg" class="Respository" width=23 height=16>
         <b><%=label%></b>
         </div>
-     <br>
-
-
-
+    <br>
+    <div class="InsideFolder2">
     <%
-    end        
-end     
-links=Site.all.where(respository_id:1)
-links.each do |site|
-%>
-<%=site.nom%>
-<br>
+    links=Site.where(respository_id:id_respository)
+        links.each do |site|
+        link=site.nom     
+
+    %>
+    <%=link%>        
+    <br>        
 <%
-end    
+        end #end for each   
+        %>
+        </div> 
+<%        
+end # end if   
 %>
+
 </div>
