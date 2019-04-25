@@ -13,6 +13,14 @@ class SitesController < ApplicationController
 
   end
 
+  def move 
+   if request.post?
+    label=params[:label]
+    unless(label.nil?)
+    Respository.create(label:label)
+    end  
+   end 
+  end 
 
   def Scrap 
     if request.post?

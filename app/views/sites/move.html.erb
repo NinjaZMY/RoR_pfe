@@ -1,21 +1,52 @@
 <nav class="nav nav-pills flex-column flex-sm-row RespositoryNav">
-  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction  btn btn-outline-light " href="#">Add Folder</a>
+  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction  btn btn-outline-light "
+  data-toggle="modal" data-target="#NewFolderModal" href="#">Add Folder</a>
   <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light " href="#">Move</a>
   <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light " href="#">Delete</a>
   
 </nav>
+<!-- New Folder Modal -->
+<div class="modal fade" id="NewFolderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" align="center">
+      <div class="modal-header">
+        <h5 class="modal-title Add-Folder-title" id="exampleModalLabel">Add Folder</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form  action="<%=move_path%>" method=post >
+              <input required name="label" placeholder="Folder Name",
+                class="form-control form" >
+
+
+
+                <input type="submit" value='Add Folder' id="AddFolderBtn"  class="button btn btn-dark"  >
+                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>    
+
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <%
 url=request.original_fullpath
 
 %>
-
+<%=params%>
 
 <div class="RespositoryList"> 
 
 <%
 
 
-if(url=="/move")
+if(url=="/move") #we're inside root 
     respositories=Respository.all
     respositories.each do |respository| 
     label=respository.label 
