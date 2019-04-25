@@ -4,10 +4,15 @@
   <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light " href="#">Delete</a>
   
 </nav>
-<div class="RespositoryList">
 <%
 url=request.original_fullpath
 
+%>
+
+
+<div class="RespositoryList"> 
+
+<%
 
 
 if(url=="/move")
@@ -36,8 +41,8 @@ if(url=="/move")
     <%=site.nom%>
     <br>
     <%
-    end 
-else
+    end #end for each
+else # We are inside a folder 
     index=url.index '?'
     url=url[index+1,url.length]
     #decoded =url  
@@ -47,6 +52,13 @@ else
     id_respository=url.to_i
     label=Respository.find(id_respository).label
 %>
+        <a href="<%=move_path%>" class="ReturnToRoot" ><img src="<%=request.base_url%>/assets/return_to_root.png" id="RootBtn"> 
+        Return to Root
+        </a>
+        
+
+        
+        
         <div class="FolderDiv">  
         <img  src="<%=request.base_url%>/assets/folder_icon.jpg" class="Respository" width=23 height=16>
         <b><%=label%></b>
