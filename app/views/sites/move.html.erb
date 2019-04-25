@@ -14,19 +14,22 @@ if(url=="/move")
     respositories=Respository.all
     respositories.each do |respository| 
     label=respository.label 
+    respository_id=respository.id 
+    path=move_path+"?"+respository_id.to_s
         if (label!="")    
-        %>
-            <div class="FolderDiv">  
-            <img  src="<%=request.base_url%>/assets/folder_icon.jpg" class="Respository" width=23 height=16>
-            <b><%=label%></b>
-            </div>
+        %>  <a class="RespositoryFolder" href="<%=path%>">
+                <div class="FolderDiv">  
+                <img  src="<%=request.base_url%>/assets/folder_icon.jpg" class="Respository" width=23 height=16>
+                <b><%=label%></b>
+                </div>
+            </a>
         <br>
 
 
 
         <%
-        end        
-    end     
+        end #end if        
+    end     # end for each
     links=Site.all.where(respository_id:1)
     links.each do |site|
     %>

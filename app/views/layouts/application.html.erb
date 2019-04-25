@@ -237,10 +237,12 @@ position:relative;
                 directories+=@respository
                 relativePosition+=22
               %>
-              <div class="FolderDiv">  
-              <img  src="<%=request.base_url%>/assets/folder_icon.jpg" class="Respository" width=23 height=16>
-              <b><%=@respository%></b>
-              </div>
+              <a class="SiteNavFolder" href="<%=@path%>">
+                <div class="FolderDiv">  
+                <img  src="<%=request.base_url%>/assets/folder_icon.jpg" class="Respository" width=23 height=16>
+                <b><%=@respository%></b>
+                </div>
+              </a>
               <br>
               
               <%
@@ -308,7 +310,7 @@ position:relative;
                               <br>
                                   <%= button_to 'Delete Link', site_path(site), method: 'delete',
                                   data: { confirm: "Voulez vous vraiment Supprimer le lien de #{site[:nom]} ?" },
-                                  class:"popover-btn btn btn-dark"   %>
+                                  class:"popover-btn btn btn-secondary"   %>
 
                                  
                           
