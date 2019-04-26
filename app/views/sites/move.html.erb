@@ -66,7 +66,7 @@
 <%
 url=request.original_fullpath
 ordre=0;
-
+target="<select name='target'>"
 %>
 
 <%=params%>
@@ -83,7 +83,7 @@ if(url=="/move") #we're inside root
     label=respository.label 
     respository_id=respository.id 
     path=move_path+"?"+respository_id.to_s
-        if (label!="")    
+        if (label!="") #if the folder is different than root then display    
         %>  <a class="RespositoryFolder" href="<%=path%>">
                 <div class="FolderDiv">  
                 <img  src="<%=request.base_url%>/assets/folder_icon.jpg" class="Respository" width=23 height=16>
@@ -95,6 +95,7 @@ if(url=="/move") #we're inside root
 
 
         <%
+        target+="<option value='"+respository_id.to_s+"'>"+label +"</option>"
         end #end if        
     end     # end for each
     %>
@@ -116,6 +117,7 @@ if(url=="/move") #we're inside root
 
 <%    
 else # We are inside a folder 
+    target+="<option value='1' > Root </option>"
     index=url.index '?'
     url=url[index+1,url.length]
     #decoded =url  
@@ -152,7 +154,14 @@ else # We are inside a folder
             <br>        
             <%
             end #end for each   
-        
+        respositories=Respository.having("id!=1 AND id!=#{id_respository}").group('id')
+            respositories.each do |folder|
+             label=folder.label  
+             respository_id=folder.id 
+             target+="<option value='"+respository_id.to_s+"'>"+label+" </option>"
+
+
+            end #end for each  
         %>
     </div> 
 <%        
@@ -163,7 +172,9 @@ end # end if
           <script>
           document.getElementById('MoveFiles').classList+="d-none"
           </script>
-        <%end # end if %>
+        <%end # end if 
+        target+="</select>"
+        %>
         
 
         
@@ -178,7 +189,7 @@ end # end if
 </div>
 <script>
 MoveForm=document.forms['MoveForm'];
-MoveForm.innerHTML+='<input type="hidden" value="<%=ordre%>" name=ordre>'
+MoveForm.innerHTML+="<%=raw target%><input type=\"hidden\" value=\"<%=ordre%>\" name=ordre>";
 Data=document.getElementById('data');
 document.getElementById('MoveFiles').onclick=function()
 {
