@@ -24,10 +24,12 @@ class SitesController < ApplicationController
     length=ordre.to_i  
       for i in 1..length do 
        index=i.to_s  
-       site_id=params[:link][index]  
-       respository_target_id=params[:target] 
-       redirect_to move_path+"?"+respository_target_id
+       site_id=params[:link][index].to_i   
+       respository_target_id=params[:target]
+       respository_id=respository_target_id.to_i 
+       Site.where(id:site_id).update(respository_id:respository_id) 
       end # end for   
+    redirect_to move_path+"?"+respository_target_id
     end  # end unless(ordre.nil?)
    end #end if request.post?
   end # end of function
