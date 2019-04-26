@@ -1,14 +1,18 @@
 <nav class="nav nav-pills flex-column flex-sm-row RespositoryNav">
-  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction  btn btn-outline-light "
-  data-toggle="modal" data-target="#NewFolderModal" href="#">Add Folder</a>
+  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction  btn btn-outline-light ModifyRespositoryNav "
+  data-toggle="modal" data-target="#NewFolderModal" href="#"><font 
+  class='InsideNavAction' >Add Folder</font></a>
   <a id="RenameFolder" 
-  class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light " href="#">
-  Rename Folder
+  class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light ModifyRespositoryNav " href="#">
+  <font 
+  class='InsideNavAction' >Rename Folder</font>
   </a>
   
-  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light "
-   id="MoveFiles" data-toggle="modal" href="#" >Move</a>
-  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light " href="#">Delete</a>
+  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light ModifyRespositoryNav "
+   id="MoveFiles" data-toggle="modal" href="#" ><font 
+   class='InsideNavAction' >Move</font></a>
+  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light ModifyRespositoryNav " href="#"><font 
+  class='InsideNavAction' >Delete</font></a>
   
 </nav>
 <!-- New Folder Modal -->
@@ -74,6 +78,8 @@ if(length==0) #there are no folders other than root
 %>
   <script>
   document.getElementById('RenameFolder').classList+="d-none";
+  document.getElementById('MoveFiles').classList+="d-none";
+  
   </script>
 <%
 end # end if(length==0)   
@@ -119,9 +125,11 @@ if(url=="/move") #we're inside root
       links.each do |site|
       ordre+=1
       site_id=site.id
-      %>
-      <input type="checkbox" name="link[<%=ordre%>]" value="<%=site_id%>" >
-      
+        unless(length==0)# if there's folders other than root then display checkbox 
+        %>
+        
+        <input type="checkbox" name="link[<%=ordre%>]" value="<%=site_id%>" >
+        <%end%>
       <%=site.nom%>
       <br>
       <%

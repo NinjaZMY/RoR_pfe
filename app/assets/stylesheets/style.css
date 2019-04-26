@@ -668,3 +668,25 @@ left: 0px;
 
 
 }
+
+.ModifyRespositoryNav
+{
+
+height: 23px;
+position: relative;
+top: 18px;
+
+
+
+}
+
+.ModifyRespositoryNav:hover
+{
+height:23px;
+}
+
+.InsideNavAction
+{
+position: relative;
+bottom: 8px;  
+}
