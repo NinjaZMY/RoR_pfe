@@ -125,6 +125,12 @@ else # We are inside a folder
         #decoded = URI.decode(decoded) 
         #end while(decoded != URI.decode(decoded)  )
     id_respository=url.to_i
+      if(id_respository==1) # if we're at root
+      %>
+      <script>
+        location.href='<%=move_path%>'
+      </script>  
+      <%end  
     label=Respository.find(id_respository).label
 %>
         <a href="<%=move_path%>" class="ReturnToRoot" ><img src="<%=request.base_url%>/assets/return_to_root.png" id="RootBtn"> 

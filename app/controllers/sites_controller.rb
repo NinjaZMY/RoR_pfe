@@ -18,9 +18,19 @@ class SitesController < ApplicationController
     label=params[:label]
     unless(label.nil?)
     Respository.create(label:label)
-    end  
-   end 
-  end 
+    end  #end unless
+    ordre=params[:ordre]
+    unless(ordre.nil?) # if ordre!=nil // action = move files 
+    length=ordre.to_i  
+      for i in 1..length do 
+       index=i.to_s  
+       site_id=params[:link][index]  
+       respository_target_id=params[:target] 
+       redirect_to move_path+"?"+respository_target_id
+      end # end for   
+    end  # end unless(ordre.nil?)
+   end #end if request.post?
+  end # end of function
 
   def Scrap 
     if request.post?
