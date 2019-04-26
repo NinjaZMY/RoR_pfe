@@ -145,3 +145,32 @@ end # end if
     </form>
 
 </div>
+<script>
+document.getElementById('MoveFiles').onclick=function()
+{
+  forms = document.forms
+  length = forms.length 
+  form=forms[length-1] 
+  inputs=form.getElementsByTagName('input')
+  length=inputs.length
+  i=length-4
+  checkedNumber=0;
+  for(j=0;j<i+1;j++)
+  {
+  checkbox=inputs[j]
+  if(checkbox.checked)
+    {
+      checkedNumber++;
+    }
+  }
+  if(checkedNumber==0)
+  {
+    alert('You need to check at least one link in order to move it');
+  }
+  else
+  {
+    alert('you now can move any link that you have checked')
+
+  }
+}
+</script>
