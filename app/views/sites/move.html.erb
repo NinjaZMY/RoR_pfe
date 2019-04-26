@@ -3,9 +3,10 @@
   data-toggle="modal" data-target="#NewFolderModal" href="#"><font 
   class='InsideNavAction' >Add Folder</font></a>
   <a id="RenameFolder" 
-  class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light ModifyRespositoryNav " href="#">
+  class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light ModifyRespositoryNav " 
+   data-toggle="modal" data-target="#RenameFolderModal" href="#">
   <font 
-  class='InsideNavAction' >Rename Folder</font>
+  class='InsideNavAction'   >Rename Folder</font>
   </a>
   
   <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light ModifyRespositoryNav "
@@ -72,6 +73,8 @@
     </div>
   </div>
 </div>
+
+
 <%
 length=Respository.having('id!=1').group('id').length
 if(length==0) #there are no folders other than root 
@@ -82,6 +85,14 @@ if(length==0) #there are no folders other than root
   
   </script>
 <%
+else # there's at least one folder other than root 
+  respositories=Respository.having('id!=1').group('id')
+  renamableFolders="<select class='form form-control' name='FolderToRename' >"
+    respositories.each do |folder| 
+    label=folder.label 
+    respository_id=folder.id
+    renamableFolders+="<option value='"+respository_id.to_s+"'>"+label+" </option>"
+    end  
 end # end if(length==0)   
 url=request.original_fullpath
 ordre=0;
@@ -89,6 +100,10 @@ target="<select class='form-control form' name='target'>"
 %>
 
 <%=params%>
+
+
+
+
 
 <div class="RespositoryList"> 
     <form >
@@ -250,3 +265,33 @@ document.getElementById('MoveFiles').onclick=function()
   }
 }
 </script>
+
+
+<!-- Rename Folder Modal -->
+<div class="modal fade" id="RenameFolderModal" tabindex="-1" role="dialog" aria-labelledby="RenameFolderModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" align="center">
+      <div class="modal-header">
+        <h5 class="modal-title Add-Folder-title" id="RenameFolderModalLabel">Move Links</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form name="RenameFolderForm" method="post">
+                  
+           <%=raw renamableFolders%>
+           <input required name="NewFolderName" placeholder="New Folder Name",
+                class="form-control form" >
+
+            <input type="submit" value='Rename Folder' id="AddFolderBtn"  class="button btn btn-dark"  >
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>    
+                
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

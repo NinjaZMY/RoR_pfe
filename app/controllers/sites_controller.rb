@@ -31,7 +31,13 @@ class SitesController < ApplicationController
       end # end for   
     redirect_to move_path+"?"+respository_target_id
     end  # end unless(ordre.nil?)
-   end #end if request.post?
+      respository_id=params[:FolderToRename].to_i
+        unless(respository_id==0)#if action == Rename Folder    
+        newFolderName=params[:NewFolderName]  
+        Respository.find(respository_id).update(label:newFolderName)
+        redirect_to move_path+'?'+respository_id.to_s
+        end #end unless(respository_id==0)  
+      end #end if request.post?
   end # end of function
 
   def Scrap 
