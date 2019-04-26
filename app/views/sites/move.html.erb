@@ -1,7 +1,8 @@
 <nav class="nav nav-pills flex-column flex-sm-row RespositoryNav">
   <a class="flex-sm-fill text-sm-center nav-link RespositoryAction  btn btn-outline-light "
   data-toggle="modal" data-target="#NewFolderModal" href="#">Add Folder</a>
-  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light " href="#">
+  <a id="RenameFolder" 
+  class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light " href="#">
   Rename Folder
   </a>
   
@@ -68,6 +69,14 @@
   </div>
 </div>
 <%
+length=Respository.having('id!=1').group('id').length
+if(length==0) #there are no folders other than root 
+%>
+  <script>
+  document.getElementById('RenameFolder').classList+="d-none";
+  </script>
+<%
+end # end if(length==0)   
 url=request.original_fullpath
 ordre=0;
 target="<select class='form-control form' name='target'>"
