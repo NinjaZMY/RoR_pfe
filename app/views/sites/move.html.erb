@@ -1,7 +1,8 @@
 <nav class="nav nav-pills flex-column flex-sm-row RespositoryNav">
   <a class="flex-sm-fill text-sm-center nav-link RespositoryAction  btn btn-outline-light "
   data-toggle="modal" data-target="#NewFolderModal" href="#">Add Folder</a>
-  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light " href="#">Move</a>
+  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light "
+   id="MoveFiles" href="#">Move</a>
   <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light " href="#">Delete</a>
   
 </nav>
@@ -29,7 +30,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -37,11 +37,14 @@
 
 <%
 url=request.original_fullpath
+ordre=0;
 
 %>
+
 <%=params%>
 
 <div class="RespositoryList"> 
+    <form name="MoveForm" method="post">
 
 <%
 
@@ -66,13 +69,24 @@ if(url=="/move") #we're inside root
         <%
         end #end if        
     end     # end for each
-    links=Site.all.where(respository_id:1)
-    links.each do |site|
     %>
-    <%=site.nom%>
-    <br>
-    <%
-    end #end for each
+
+
+      <%
+      links=Site.all.where(respository_id:1)
+      links.each do |site|
+      ordre+=1
+      site_id=site.id
+      %>
+      <input type="checkbox" name="link[<%=ordre%>]" value="<%=site_id%>" >
+      
+      <%=site.nom%>
+      <br>
+      <%
+      end #end for each
+      %>
+
+<%    
 else # We are inside a folder 
     index=url.index '?'
     url=url[index+1,url.length]
@@ -96,20 +110,38 @@ else # We are inside a folder
         </div>
     <br>
     <div class="InsideFolder2">
-    <%
-    links=Site.where(respository_id:id_respository)
-        links.each do |site|
-        link=site.nom     
-
-    %>
-    <%=link%>        
-    <br>        
-<%
-        end #end for each   
+        <form name="MoveForm" method="post">
+        
+        <%
+        links=Site.where(respository_id:id_respository)
+            links.each do |site|
+            link=site.nom     
+            ordre+=1
+            site_id=site.id
+            %>
+            <input type="checkbox" name="link[<%=ordre%>]" value="<%=site_id%>" >
+            <%=link%>        
+            <br>        
+            <%
+            end #end for each   
+        
         %>
-        </div> 
+    </div> 
 <%        
 end # end if   
-%>
+%>       <% unless (ordre==0) # ordre != 0 // there are files 
+            %>
+
+            <br>
+        <input type=submit>
+        <%else #ordre==0 // there are no files 
+        %> 
+          <script>
+          document.getElementById('MoveFiles').classList+="d-none"
+          </script>
+        <%end # end unless %>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>    
+        <input type="hidden" value="<%=ordre%>" name=ordre>
+    </form>
 
 </div>
