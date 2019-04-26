@@ -2,7 +2,7 @@
   <a class="flex-sm-fill text-sm-center nav-link RespositoryAction  btn btn-outline-light "
   data-toggle="modal" data-target="#NewFolderModal" href="#">Add Folder</a>
   <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light "
-   id="MoveFiles" href="#">Move</a>
+   id="MoveFiles" data-toggle="modal" href="#" >Move</a>
   <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light " href="#">Delete</a>
   
 </nav>
@@ -35,6 +35,33 @@
   </div>
 </div>
 
+<!-- Move Modal -->
+<div class="modal fade" id="MoveModal" tabindex="-1" role="dialog" aria-labelledby="MoveModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" align="center">
+      <div class="modal-header">
+        <h5 class="modal-title Add-Folder-title" id="MoveModalLabel">Move Links</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form name="MoveForm" method="post">
+
+
+
+
+            <input type="submit" value='Move Links' id="AddFolderBtn"  class="button btn btn-dark"  >
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>    
+  
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <%
 url=request.original_fullpath
 ordre=0;
@@ -44,7 +71,7 @@ ordre=0;
 <%=params%>
 
 <div class="RespositoryList"> 
-    <form name="MoveForm" method="post">
+    <form >
 
 <%
 
@@ -129,19 +156,22 @@ else # We are inside a folder
     </div> 
 <%        
 end # end if   
-%>       <% unless (ordre==0) # ordre != 0 // there are files 
-            %>
-
-            <br>
-        <input type=submit>
-        <%else #ordre==0 // there are no files 
+%>       
+        <%if (ordre==0) #ordre==0 // there are no files 
         %> 
           <script>
           document.getElementById('MoveFiles').classList+="d-none"
           </script>
-        <%end # end unless %>
-        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>    
+        <%end # end if %>
         <input type="hidden" value="<%=ordre%>" name=ordre>
+
+        
+    
+    
+    
+    
+    
+    
     </form>
 
 </div>
@@ -153,7 +183,7 @@ document.getElementById('MoveFiles').onclick=function()
   form=forms[length-1] 
   inputs=form.getElementsByTagName('input')
   length=inputs.length
-  i=length-4
+  i=length-2
   checkedNumber=0;
   for(j=0;j<i+1;j++)
   {
@@ -169,7 +199,7 @@ document.getElementById('MoveFiles').onclick=function()
   }
   else
   {
-    alert('you now can move any link that you have checked')
+    $('#MoveModal').modal('show');
 
   }
 }
