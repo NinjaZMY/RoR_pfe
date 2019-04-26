@@ -66,7 +66,7 @@
 <%
 url=request.original_fullpath
 ordre=0;
-target="<select name='target'>"
+target="<select class='form-control form' name='target'>"
 %>
 
 <%=params%>
@@ -189,7 +189,8 @@ end # end if
 </div>
 <script>
 MoveForm=document.forms['MoveForm'];
-MoveForm.innerHTML+="<%=raw target%><input type=\"hidden\" value=\"<%=ordre%>\" name=ordre>";
+MoveForminnerHTML=MoveForm.innerHTML
+MoveForm.innerHTML="<%=raw target%><input type=\"hidden\" value=\"<%=ordre%>\" name=ordre>"+MoveForminnerHTML;
 Data=document.getElementById('data');
 document.getElementById('MoveFiles').onclick=function()
 {
