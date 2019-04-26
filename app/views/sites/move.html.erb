@@ -47,13 +47,14 @@
       </div>
       <div class="modal-body">
           <form name="MoveForm" method="post">
-
+                  
 
 
 
             <input type="submit" value='Move Links' id="AddFolderBtn"  class="button btn btn-dark"  >
             <%= hidden_field_tag :authenticity_token, form_authenticity_token %>    
-  
+             <div class="hidden" id="data">
+             </div>     
           </form>
       </div>
       <div class="modal-footer">
@@ -163,7 +164,7 @@ end # end if
           document.getElementById('MoveFiles').classList+="d-none"
           </script>
         <%end # end if %>
-        <input type="hidden" value="<%=ordre%>" name=ordre>
+        
 
         
     
@@ -176,21 +177,27 @@ end # end if
 
 </div>
 <script>
+MoveForm=document.forms['MoveForm'];
+MoveForm.innerHTML+='<input type="hidden" value="<%=ordre%>" name=ordre>'
+Data=document.getElementById('data');
 document.getElementById('MoveFiles').onclick=function()
 {
-  forms = document.forms
-  length = forms.length 
-  form=forms[length-1] 
-  inputs=form.getElementsByTagName('input')
-  length=inputs.length
-  i=length-2
+  forms = document.forms;
+  length = forms.length ;
+  form=forms[length-1] ;
+  inputs=form.getElementsByTagName('input');
+  length=inputs.length;
+  i=length-1;
   checkedNumber=0;
   for(j=0;j<i+1;j++)
   {
   checkbox=inputs[j]
   if(checkbox.checked)
     {
-      checkedNumber++;
+    name=checkbox.name;
+    value=checkbox.value;
+    Data.innerHTML+="<input type='hidden' value='"+value+"' name='" +name +"' >" ;  
+    checkedNumber++;
     }
   }
   if(checkedNumber==0)
