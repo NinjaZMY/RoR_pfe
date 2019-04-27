@@ -106,7 +106,8 @@ target="<select class='form-control form' name='target'>"
 
 
 <div class="RespositoryList"> 
-    <form >
+  <form name="MoveForm1" method="post">
+    
 
 <%
 
@@ -182,7 +183,6 @@ else # We are inside a folder
         </div>
     <br>
     <div class="InsideFolder2">
-        <form name="MoveForm" method="post">
         
         <%
         links=Site.where(respository_id:id_respository)
@@ -238,7 +238,7 @@ document.getElementById('MoveFiles').onclick=function()
 {
   forms = document.forms;
   length = forms.length ;
-  form=forms[length-1] ;
+  form=forms['MoveForm1'];
   inputs=form.getElementsByTagName('input');
   length=inputs.length;
   i=length-1;
