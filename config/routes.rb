@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   get "signin" => "devise/sessions#new"
   delete "logout" => "devise/sessions#destroy"
   get "signup" => "devise/registrations#new"
-  
   end
+  
   get "home1" => "sites#home1"
   get "home2" => "sites#home2"
   get "home3" => "sites#home3"
@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   get "move" => "sites#move"
   post "move" => "sites#move"
   get "delete"=> 'sites#SuperDelete'
+  
 end
