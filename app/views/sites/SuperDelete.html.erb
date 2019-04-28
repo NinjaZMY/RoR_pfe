@@ -31,14 +31,41 @@ end
   <form name="SuperDeleteForm" method="post" id="ActionForm">
 <%
 if (insideRoot)
-respositories=Respository.having('id!=1').group('id')
-respositories.each do |folder|
-%>
+  respositories=Respository.having('id!=1').group('id')
+  respositoryNumber=0
+  respositories.each do |folder|
+    respositoryNumber+=1
+    label=folder.label 
+    respository_id=folder.id 
+    path=delete_path+"?"+respository_id.to_s
+    %>
+    <input type="checkbox" class="DeleteFolder" name="Respository[<%=respositoryNumber%>]" value="<%=respository_id%>" >
+    
+    <a class="RespositoryFolder" href="<%=path%>">
+      
+    <div class="FolderDiv DeleteFolderDiv">  
+      <img  src="<%=request.base_url%>/assets/folder_icon.jpg" class="Respository" width=23 height=16>
+      <b><%=label%></b>
+      </div>
+    </a>
+            
 
 
-
-<%
-end #end for each
+    <%
+  end #end for each , displayed folders 
+  linkNumber=0;
+  links=Site.where(respository_id:1)
+    links.each do |site|
+     linkNumber+=1 
+      label=site.nom
+      site_id=site.id
+      %>
+      <br>
+      <input type="checkbox" name="link[<%=linkNumber%>]" value="<%=site_id%>" >
+      <%=label%>
+      
+      <%
+    end # end for each , displayed Sites  
 else # inside Folder
 %>
 
@@ -48,3 +75,108 @@ else # inside Folder
 <%
 end   
 %>
+</form>
+</div>
+<div class="d-none" id="container"></div>
+
+<%data=[43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]%>
+
+<script>
+chart=Highcharts.chart('container', {
+    chart: {
+        backgroundColor: 'transparent'
+    }
+    ,
+    title: {
+        text: 'Number of Notifications By Days'
+    },
+
+    subtitle: {
+        text: 'Source: Axian White Team application'
+    },
+
+    yAxis: {
+        title: {
+            text: 'Number of Notifications'
+        }
+    },
+    xAxis: {
+      title:{
+       text : 'Number of days' 
+      } ,
+      categories : ['1','2','3','4','5','6','7','8'] 
+
+
+    }
+    ,
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle'
+    },
+
+    plotOptions: {
+        series: {
+            label: {
+                connectorAllowed: false
+            } , 
+            
+
+        } ,
+    },
+
+    series: [
+    <%
+    for i in 1..5 do
+    data.clear
+      for j in 0..7 do
+        
+        data[j]=(rand*i+6).to_i 
+        if(data[j]<data[j-1]&&j>0) 
+        
+        data[j]=data.max 
+        end #end if 
+        if(data[j]>=10&&data[j-1]>=10)
+        data[j]=rand(i)+6.to_i  
+        end #end if 
+      end # end for j
+      %>
+     { name : 'data <%=i%>' ,
+        data : <%=data%>  
+    } ,  
+    <%
+    end%>
+     ],
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    }
+
+});
+chart.setSize(450, 250, doAnimation =
+true);
+
+
+
+</script>
+<style>
+#container
+{
+position: absolute;
+overflow: hidden;
+top: 13%;
+left: 20%;
+
+}
+</style>
