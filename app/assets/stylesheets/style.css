@@ -596,7 +596,7 @@ left: 258px;
 width: 57.86%;
 }
 
-#ActionForm
+.ActionForm
 {
 left: 1%;
 position: relative;
@@ -693,3 +693,4 @@ height:23px;
 position: relative;
 bottom: 8px;  
 }
+

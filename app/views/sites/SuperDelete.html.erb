@@ -28,7 +28,7 @@ end
 </nav>
 <div class="RespositoryList"> 
 
-  <form name="SuperDeleteForm" method="post" id="ActionForm">
+  <form name="SuperDeleteForm" class="SuperDeleteForm ActionForm" method="post" >
 <%
 if (insideRoot)
   respositories=Respository.having('id!=1').group('id')
@@ -180,3 +180,4 @@ left: 20%;
 
 }
 </style>
+<%=params%>
