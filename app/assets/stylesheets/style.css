@@ -518,7 +518,7 @@ background-color:transparent;
 color:midnightblue;
 height:10px;
 position:relative;
-top:-4px;
+top:0px;
 }
 
 .ScrapMethod
@@ -579,9 +579,10 @@ color: black;
 {
 color: #2b2a2b;
 background-color:transparent;
-height:10px;
-position:relative;
-top:-4px;
+height: 0px;
+position: relative;
+display: block;
+bottom: 0px;
 }
 
 .RespositoryNav
@@ -642,20 +643,12 @@ position: relative;
 top:-4px;
 }
 
-#RootBtn
-{
 
-
-
-top: 11px;
-height: 33px;
-
-}
 
 .ReturnToRoot
 {
 
-color: lightgray;
+color:black;
 width: 753px;
 background: bottom;
 background-size: ;

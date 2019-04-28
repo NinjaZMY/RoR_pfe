@@ -8,18 +8,27 @@ url=url[index+1,url.length]
 moveUrl+='?'+url 
 insideRoot=false 
 end
+ length=Site.all.length+Respository.all.length
+  if(length==0) # if there's no file & there's no folder 
+  %>
+    <script>
+    location.href="<%=root_path%>";
+
+    </script>
+  <%
+  end
 %>
 <nav class="nav nav-pills flex-column flex-sm-row RespositoryNav">
-  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction  btn btn-outline-light ModifyRespositoryNav "
+  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction  btn btn-outline-dark ModifyRespositoryNav "
    href="<%=moveUrl%>"><font 
-  class='InsideNavAction' >Modify Respository</font></a>
-
-  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light ModifyRespositoryNav " href="#"><font 
+  class='InsideNavAction' >Modify Respository</font>
+  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-dark ModifyRespositoryNav " href="#"><font 
   class='InsideNavAction' >Delete</font></a>
   
 </nav>
 <div class="RespositoryList"> 
-  <form name="SuperDeleteForm" method="post">
+
+  <form name="SuperDeleteForm" method="post" id="ActionForm">
 <%
 if (insideRoot)
 respositories=Respository.having('id!=1').group('id')
