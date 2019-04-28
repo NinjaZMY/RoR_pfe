@@ -1,3 +1,5 @@
+
+
 <%
 moveUrl=move_path
 url=request.original_fullpath # if in root  , url == delete 
@@ -16,14 +18,16 @@ end
 
     </script>
   <%
-  end
+  end # end if length==0 
+length=0
 %>
 <nav class="nav nav-pills flex-column flex-sm-row RespositoryNav">
   <a class="flex-sm-fill text-sm-center nav-link RespositoryAction  btn btn-outline-dark ModifyRespositoryNav "
    href="<%=moveUrl%>"><font 
   class='InsideNavAction' >Modify Respository</font>
-  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-dark ModifyRespositoryNav " href="#"><font 
-  class='InsideNavAction' >Delete</font></a>
+  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-dark ModifyRespositoryNav " 
+  data-toggle="modal" href="#"><font 
+  class='InsideNavAction' id="DeleteAction"   >Delete</font></a>
   
 </nav>
 <div class="RespositoryList"> 
@@ -66,6 +70,7 @@ if (insideRoot)
       
       <%
     end # end for each , displayed Sites  
+    length=linkNumber+respositoryNumber
 else # inside Folder
 %>
 
@@ -75,8 +80,10 @@ else # inside Folder
 <%
 end   
 %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>    
 </form>
 </div>
+
 <div class="d-none" id="container"></div>
 
 <%data=[43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]%>
@@ -168,7 +175,6 @@ chart.setSize(450, 250, doAnimation =
 true);
 
 
-
 </script>
 <style>
 #container
@@ -180,4 +186,36 @@ left: 20%;
 
 }
 </style>
+
 <%=params%>
+<script>
+
+$("#DeleteAction").on('click', function(){Submit()})
+
+
+function Submit()
+{
+length=<%=length%>-1;
+forms=document.forms
+form=forms['SuperDeleteForm'];
+inputs=form.getElementsByTagName('input');
+checkboxChecked=false; 
+  for(i=0;i<=length;i++)
+  {
+   checkbox=inputs[i]
+    if(checkbox.checked)
+    {
+     checkboxChecked=true;
+     break; 
+    } //end if 
+  } //end for
+ if(checkboxChecked)
+ {
+  form.submit() ;
+ }  
+  else
+ {
+   alert('you nigga need to check some motherfucking Element');
+ } //end if   
+}//end function
+</script>
