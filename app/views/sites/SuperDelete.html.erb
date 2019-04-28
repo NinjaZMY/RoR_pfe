@@ -1,6 +1,16 @@
+<%
+moveUrl=move_path
+url=request.original_fullpath # if in root  , url == delete 
+unless(url=="/delete" ) #we're inside a folder
+index=url.index '?'
+url=url[index+1,url.length]
+moveUrl+='?'+url 
+
+end
+%>
 <nav class="nav nav-pills flex-column flex-sm-row RespositoryNav">
   <a class="flex-sm-fill text-sm-center nav-link RespositoryAction  btn btn-outline-light ModifyRespositoryNav "
-  data-toggle="modal" data-target="#NewFolderModal" href="#"><font 
+   href="<%=moveUrl%>"><font 
   class='InsideNavAction' >Modify Respository</font></a>
 
   <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light ModifyRespositoryNav " href="#"><font 
