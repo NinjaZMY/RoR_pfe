@@ -500,12 +500,14 @@ width: 241px;
 {
 position: relative;
 top: 7.5px;
+color: honeydew;
 }
 
 .navlink
 {
 color:black;
-
+position: relative;
+top: 4px;
 
 
 }
@@ -514,17 +516,17 @@ color:black;
 {
 background-color:transparent;
 color:midnightblue;
-height:17px;
+height:10px;
 position:relative;
 top:-4px;
 }
 
 .ScrapMethod
 {
-font-size: 20px;
+font-size: 28px;
 position: absolute;
-top: 16%;
-left: 47%;
+top: 14%;
+left: 30%;
 color: floralwhite;
 }
 
@@ -569,6 +571,17 @@ color:white;
 {
 width:900px;
 height: 0px;
+color: black;
+}
+
+.RespositoryFolder:hover
+, .FolderDiv:hover
+{
+color: #2b2a2b;
+background-color:transparent;
+height:10px;
+position:relative;
+top:-4px;
 }
 
 .RespositoryNav
@@ -579,9 +592,11 @@ left: 258px;
 width: 57.86%;
 }
 
-.RespositoryAction
+#ActionForm
 {
-color: cadetblue;
+left: 1%;
+position: relative;
+top: 1%;
 }
 
 .RespositoryList
@@ -589,12 +604,16 @@ color: cadetblue;
 position: absolute;
 top: 85px;
 left: 258px;
-color: honeydew;
-background-color: lightslategray;
+color: black;
+background-color: lightgray;
 opacity: 0.7;
 width: 58%;
 height: 584px;
 overflow-y: auto;
+border: 1px solid transparent;
+line-height: 1.5;
+border-color: #343a40;
+border-radius: 0.25rem;
 }
 
 .InsideFolder2
@@ -603,21 +622,9 @@ overflow-y: auto;
   left:25px;
 } 
 
-.RespositoryFolder
-{
-color: honeydew;
 
 
-} 
 
-.RespositoryFolder:hover
-{
-color:black;
-background-color:transparent;
-height:17px;
-position:relative;
-top:-4px;
-}
 
 .SiteNavFolder
 {

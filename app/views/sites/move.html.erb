@@ -11,20 +11,20 @@ unless(url=="/move" ) #we're inside a folder
 end #end unless   
 %>
 <nav class="nav nav-pills flex-column flex-sm-row RespositoryNav">
-  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction  btn btn-outline-light ModifyRespositoryNav "
+  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction  btn btn-outline-dark ModifyRespositoryNav "
   data-toggle="modal" data-target="#NewFolderModal" href="#"><font 
   class='InsideNavAction' >Add Folder</font></a>
   <a id="RenameFolder" 
-  class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light ModifyRespositoryNav " 
+  class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-dark ModifyRespositoryNav " 
    data-toggle="modal" data-target="#RenameFolderModal" href="#">
   <font 
   class='InsideNavAction'   >Rename Folder</font>
   </a>
   
-  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light ModifyRespositoryNav "
+  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-dark ModifyRespositoryNav "
    id="MoveFiles" data-toggle="modal" href="#" ><font 
    class='InsideNavAction' >Move</font></a>
-  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light ModifyRespositoryNav "
+  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-dark ModifyRespositoryNav "
    href="<%=superDeleteUrl%>"><font 
   class='InsideNavAction' >Delete</font></a>
   
@@ -117,7 +117,7 @@ ordre=0;
 
 
 <div class="RespositoryList"> 
-  <form name="MoveForm1" method="post">
+  <form name="MoveForm1" id="ActionForm" method="post">
     
 
 <%

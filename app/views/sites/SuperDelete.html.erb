@@ -1,11 +1,12 @@
 <%
 moveUrl=move_path
 url=request.original_fullpath # if in root  , url == delete 
+insideRoot=true
 unless(url=="/delete" ) #we're inside a folder
 index=url.index '?'
 url=url[index+1,url.length]
 moveUrl+='?'+url 
-
+insideRoot=false 
 end
 %>
 <nav class="nav nav-pills flex-column flex-sm-row RespositoryNav">
@@ -17,3 +18,24 @@ end
   class='InsideNavAction' >Delete</font></a>
   
 </nav>
+<div class="RespositoryList"> 
+  <form name="SuperDeleteForm" method="post">
+<%
+if (insideRoot)
+respositories=Respository.having('id!=1').group('id')
+respositories.each do |folder|
+%>
+
+
+
+<%
+end #end for each
+else # inside Folder
+%>
+
+
+
+
+<%
+end   
+%>
