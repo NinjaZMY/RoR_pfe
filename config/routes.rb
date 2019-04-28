@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   get "connexion" => "sites#connexion"
   get "move" => "sites#move"
   post "move" => "sites#move"
+  get "delete"=> 'sites#SuperDelete'
 end
