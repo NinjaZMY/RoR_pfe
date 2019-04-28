@@ -1,3 +1,15 @@
+<%
+superDeleteUrl=delete_path # we're in root , link to Delete (respository==root )
+url=request.original_fullpath
+target="<select class='form-control form' name='target'>"
+
+unless(url=="/move" ) #we're inside a folder
+  target+="<option value='1' > Root </option>"
+  index=url.index '?'
+  url=url[index+1,url.length]
+  superDeleteUrl+='?'+url
+end #end unless   
+%>
 <nav class="nav nav-pills flex-column flex-sm-row RespositoryNav">
   <a class="flex-sm-fill text-sm-center nav-link RespositoryAction  btn btn-outline-light ModifyRespositoryNav "
   data-toggle="modal" data-target="#NewFolderModal" href="#"><font 
@@ -12,7 +24,8 @@
   <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light ModifyRespositoryNav "
    id="MoveFiles" data-toggle="modal" href="#" ><font 
    class='InsideNavAction' >Move</font></a>
-  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light ModifyRespositoryNav " href="#"><font 
+  <a class="flex-sm-fill text-sm-center nav-link RespositoryAction btn btn-outline-light ModifyRespositoryNav "
+   href="<%=superDeleteUrl%>"><font 
   class='InsideNavAction' >Delete</font></a>
   
 </nav>
@@ -94,9 +107,7 @@ else # there's at least one folder other than root
     renamableFolders+="<option value='"+respository_id.to_s+"'>"+label+" </option>"
     end  
 end # end if(length==0)   
-url=request.original_fullpath
 ordre=0;
-target="<select class='form-control form' name='target'>"
 %>
 
 <%=params%>
@@ -154,9 +165,7 @@ if(url=="/move") #we're inside root
 
 <%    
 else # We are inside a folder 
-    target+="<option value='1' > Root </option>"
-    index=url.index '?'
-    url=url[index+1,url.length]
+
     #decoded =url  
         #begin
         #decoded = URI.decode(decoded) 
@@ -380,3 +389,4 @@ Highcharts.chart('container', {
 
 });
 </script>
+<%=superDeleteUrl%>
