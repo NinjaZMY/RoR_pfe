@@ -261,10 +261,15 @@ top:-3%;
           unless(current_user.nil?)
             user_id=current_user[:id]
             @sites.each do |site|
-              if(site[:user_id]==user_id)  
+              respository_id=site.respository_id
+              queryLength=Respository.where(id:respository_id).length
+              validQuery=(queryLength!=0)
+              if(site[:user_id]==user_id &&validQuery)  
               popover_index+=1
               @site = site 
-              respository_id=site.respository_id
+              
+              
+              
               @respository=Respository.find(respository_id).label
               #@respository=site.Respository;
               @FolderClass="" 
@@ -273,7 +278,7 @@ top:-3%;
               if(@respository!="") # respository!=""
               @FolderClass="InsideFolder"  
               @path+="?"+respository_id.to_s
-              end  
+              end  #end if @respository!=''
               if(@respository!=""&&distinct==nil)
                 
                 directories+=@respository
@@ -288,7 +293,7 @@ top:-3%;
               <br>
               
               <%
-              end  
+              end  #end if @respository!=""&&distinct==nil
               %>
               <style>  
                
@@ -351,7 +356,7 @@ top:-3%;
                                   </button>
                               <br>
                                   <%= button_to 'Delete Link', site_path(site), method: 'delete',
-                                  data: { confirm: "Voulez vous vraiment Supprimer le lien de #{site[:nom]} ?" },
+                                  data: { confirm: "Do You Really Want to delete the link of #{site[:nom]} ?" },
                                   class:"popover-btn btn btn-secondary"   %>
 
                                  

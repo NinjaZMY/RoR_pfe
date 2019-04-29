@@ -15,10 +15,44 @@ class SitesController < ApplicationController
 
  def SuperDelete
   if request.post?
-    
-
-  end  
- end
+  linkNumber=params[:LinkNumber].to_i
+  respositoryNumber=params[:RespositoryNumber].to_i
+    unless(linkNumber==0)#if there's at least one link
+      for i in 1..linkNumber do
+      index=i.to_s 
+      link=params[:link]
+        if(link.nil?)
+        break
+        end  
+      site_id=link[index].to_i
+      query=Site.where(id:site_id)
+      validQuery=(query.length!=0)
+        if(validQuery)
+        Site.find(site_id).delete
+        end  
+      end # end for    
+    end #end unless linkNumber==0
+    unless(respositoryNumber==0)#if there's at least one folder
+      for i in 1..respositoryNumber do
+      index=i.to_s
+      respository=params[:Respository]
+        if(respository.nil?)
+        break
+        end  #end if
+      respository_id=respository[index].to_i
+      query=Respository.where(id:respository_id)
+      validQuery=(query.length!=0)
+        if(validQuery)
+        Respository.find(respository_id).delete
+        Site.where(respository_id:respository_id).delete_all
+        end  #end if 
+      end # end for  
+      unless(respository.nil?)
+      redirect_to delete_path
+      end #end unless respository.nil?
+    end #end unless 
+  end  #end if request.post?
+ end # end of function
  
   def move 
    if request.post?

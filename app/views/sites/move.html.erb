@@ -134,25 +134,25 @@ ordre=0;
 
 if(url=="/move") #we're inside root 
     respositories=Respository.having('id!=1').group('id')
-    respositories.each do |respository| 
-    label=respository.label 
-    respository_id=respository.id 
-    path=move_path+"?"+respository_id.to_s
-        #if the folder is different than root then display    
-        %>  <a class="RespositoryFolder" href="<%=path%>">
-                <div class="FolderDiv">  
-                <img  src="<%=request.base_url%>/assets/folder_icon.jpg" class="Respository" width=23 height=16>
-                <b><%=label%></b>
-                </div>
-            </a>
-        <br>
+      respositories.each do |respository| 
+      label=respository.label 
+      respository_id=respository.id 
+      path=move_path+"?"+respository_id.to_s
+      #if the folder is different than root then display    
+      %>  <a class="RespositoryFolder" href="<%=path%>">
+              <div class="FolderDiv">  
+              <img  src="<%=request.base_url%>/assets/folder_icon.jpg" class="Respository" width=23 height=16>
+              <b><%=label%></b>
+              </div>
+          </a>
+      <br>
 
 
 
-        <%
-        target+="<option value='"+respository_id.to_s+"'>"+label +"</option>"
-             
-    end     # end for each
+      <%
+      target+="<option value='"+respository_id.to_s+"'>"+label +"</option>"
+              
+      end     # end for each
     %>
 
 

@@ -150,7 +150,10 @@ end #end if Inside Root
 
   end  
 %>
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>    
+<input type="hidden" name="LinkNumber" value="<%=linkNumber%>">
+<input type="hidden" name="RespositoryNumber" value="<%=respositoryNumber%>">
+
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>    
 </form>
 </div>
 
@@ -281,11 +284,15 @@ checkboxChecked=false;
   } //end for
  if(checkboxChecked)
  {
-  form.submit() ;
+  c=confirm("Do You Really want to Proceed to Delete ?")
+    if(c)
+    {
+      form.submit() ;
+    }
  }  
   else
  {
-   alert('you nigga need to check some motherfucking Element');
+   alert('you need to check at least one checkbox');
  } //end if   
 }//end function
 </script>
