@@ -20,6 +20,9 @@ end
   <%
   end # end if length==0 
 length=0
+linkNumber=0;
+respositoryNumber=0
+
 %>
 <nav class="nav nav-pills flex-column flex-sm-row RespositoryNav">
   <a class="flex-sm-fill text-sm-center nav-link RespositoryAction  btn btn-outline-dark ModifyRespositoryNav "
@@ -36,7 +39,6 @@ length=0
 <%
 if (insideRoot)
   respositories=Respository.having('id!=1').group('id')
-  respositoryNumber=0
   respositories.each do |folder|
     respositoryNumber+=1
     label=folder.label 
@@ -57,7 +59,6 @@ if (insideRoot)
 
     <%
   end #end for each , displayed folders 
-  linkNumber=0;
   links=Site.where(respository_id:1)
     links.each do |site|
      linkNumber+=1 
@@ -70,15 +71,81 @@ if (insideRoot)
       
       <%
     end # end for each , displayed Sites  
-    length=linkNumber+respositoryNumber
 else # inside Folder
-%>
+  respository_id=url.to_i
+  folder =Respository.find(respository_id)
+  label=folder.label
+  respositoryNumber=1
+    if(respository_id==1) # if we're at root
+  %>
 
+    <script>
+          location.href='<%=delete_path%>'
+    </script>  
+      <%end #end if%>
+ <div class="InsideFolderDelete">
+    <a href="<%=delete_path%>" class="ReturnToRoot" ><img src="<%=request.base_url%>/assets/return1.png" id="RootBtn"> 
+            Return to Root
+    </a>
+      <div class="FolderDiv">  
+      <input type="checkbox" id="DeleteFolder" name="Respository[1]" value="<%=respository_id%>" >
+        
+      <img  src="<%=request.base_url%>/assets/folder_icon.jpg" class="Respository" width=23 height=16>
+        <b><%=label%></b>
+      </div>
+    <br>
+    <%
+    links=Site.where(respository_id:respository_id)
+      links.each do |site|
+        linkNumber+=1 
+        label=site.nom
+        site_id=site.id
+        %>
+        <div class="InsideFolder2">
+          <input type="checkbox" name="link[<%=linkNumber%>]" value="<%=site_id%>" >
 
+          <%=label%>
+        </div>
 
+        <%  
+      end #end for each
+    length=linkNumber+respositoryNumber
 
+    %>
+ </div>
+<script>
+document.getElementById('DeleteFolder').onclick=function()
+{
+  i=1;
+  
+  length=<%=length%>-1;
+  forms=document.forms
+  form=forms['SuperDeleteForm'];
+  inputs=form.getElementsByTagName('input');
+  FolderCheckbox=inputs[0];
+  FolderChecked=FolderCheckbox.checked
+    if(FolderChecked)
+  { 
+      for(i;i<=length;i++)
+      {
+      checkbox=inputs[i];
+      isChecked=checkbox.checked
+        if(!isChecked)
+        {
+          checkbox.click();
+        } // end if
+      } //end for  
+  }//end if
+  else
+  {
+   form.reset(); 
+  }  
+
+}//end function
+</script>
 <%
-end   
+end #end if Inside Root 
+
 %>
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>    
 </form>
