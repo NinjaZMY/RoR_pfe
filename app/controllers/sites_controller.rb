@@ -13,6 +13,13 @@ class SitesController < ApplicationController
 
   end
 
+ def SuperDelete
+  if request.post?
+    
+
+  end  
+ end
+ 
   def move 
    if request.post?
     label=params[:label]
