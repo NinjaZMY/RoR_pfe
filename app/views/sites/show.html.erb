@@ -7,10 +7,21 @@ location.href="<%=root_path%>";
 <%else%>
 
     <%
-    unless(params[:id].nil?)
-     
-    $site_id=params[:id];
-    end
+        unless(params[:id].nil?)
+        
+        $site_id=params[:id];
+        end #end unless 
+        
+    site=Site.find($site_id)
+    notification_Number=site[:Notification_Number] 
+    
+    notficationExist=notification_Number!=nil 
+        if(notficationExist)
+        
+        Site.where(id:$site_id).update(Notification_Number:nil)
+
+        
+        end #end if NotificationExist
     %>
 
     <%

@@ -1,4 +1,20 @@
-<%  require 'open-uri' %>
+<%  require 'open-uri' 
+now=Time.now 
+condition=(defined?($time_to_alert)==nil)  
+  if(condition)
+  $time_to_alert=Time.now+5.seconds
+  end  
+  x=0
+  if(now>=$time_to_alert&&x!=0)
+  %>
+  <script>
+  alert("5 seconds have passed")  ;
+  </script>
+  <%
+  end  
+%>
+
+
 
 <%$pageUrl=home1_path%> 
 <!DOCTYPE html>
@@ -278,6 +294,16 @@ top:-3%;
               @FolderClass="InsideFolder"  
               @path+="?"+respository_id.to_s
               end  #end if @respository!=''
+              notificationNumber=site.Notification_Number.to_i
+              notification=""
+              unless(notificationNumber==0)
+               notification="<strong class='Notification navlink '>"+notificationNumber.to_s+"</strong>" 
+                if(@respository!="")
+                @FolderClass="InsideFolderWithNotification"
+                else # we're inside Root 
+                @FolderClass="RootNotification"  
+                end #end if @respository!=""
+              end  #end unless
               if(@respository!=""&&distinct==nil)
                 
                 directories+=@respository
@@ -363,6 +389,7 @@ top:-3%;
                   </div>
               </div>
                   <div class="navDiv">                 
+                  <%=raw notification%>
                   <%= link_to site.nom, site_path(site) , class:"navlink "+@FolderClass+"" %>
                   </div>                                      
                             <button data-placement="right" data-toggle="popover" data-container="body"
@@ -429,3 +456,4 @@ top:-3%;
   
   </html>
   <%$url=request.original_url%>
+<%="now : "+now.to_s+" | Time to alert "+$time_to_alert.to_s%>
