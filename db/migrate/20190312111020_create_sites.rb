@@ -4,7 +4,7 @@ class CreateSites < ActiveRecord::Migration[5.2]
       t.string :nom
       t.string :url
       
-      t.integer :time_to_watch ,              null: false, default: 0
+      t.time :time_to_watch ,              null: false, default: 1.minute
       
       t.integer :Notification_Number
       
