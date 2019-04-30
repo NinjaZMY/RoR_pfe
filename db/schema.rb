@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_24_143709) do
+ActiveRecord::Schema.define(version: 2019_04_30_120238) do
 
   create_table "fragments", force: :cascade do |t|
     t.integer "ordre"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 2019_04_24_143709) do
     t.datetime "updated_at", null: false
     t.integer "site_id"
     t.index ["site_id"], name: "index_fragments_on_site_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "number"
+    t.integer "day", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "site_id"
+    t.index ["site_id"], name: "index_notifications_on_site_id"
   end
 
   create_table "respositories", force: :cascade do |t|
