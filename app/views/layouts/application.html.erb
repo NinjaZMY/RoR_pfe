@@ -463,3 +463,29 @@ top:-3%;
   </html>
   <%$url=request.original_url%>
 <%="now : "+now.to_s+" | Time to alert "+$time_to_alert.to_s%>
+<%
+sites=Site.all
+#i=0  
+  sites.each do  |site| 
+  url=site.url    
+    begin
+    $e=""#connected
+    $content = Nokogiri::HTML(open(url))
+    rescue Exception => $e
+    end  #end nokogiri content extraction     
+    if ($e!="") #if there's a connection problem , content cannot be loaded 
+    error="<h4>There 's a connection problem related to '#{url}'<br> #{$e} </h4>"  
+    %>
+    <%= raw error%>
+    <%
+    else #if there's no problem with connection
+    #i+=1  
+    
+    end #end if($e!="")
+
+  
+  end #end sites for each
+
+
+
+%>
