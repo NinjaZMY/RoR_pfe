@@ -491,22 +491,38 @@ z="<br><br>"
     notificationNumber=0
     $content=$content.to_s  
       @fragments.each do |fragment|
-      fragmentContent=fragment.content.to_s
-      index = $content.index fragmentContent  
+      @fragmentContent=fragment.content.to_s
+      contentContainsFragment = $content.include? @fragmentContent  
       @contentLength=$content.length 
-      @oldFragmentLength=fragmentContent.length
+      @oldFragmentLength=@fragmentContent.length
 
-        if(index==nil)
-          if(@contentLength>@oldFragmentLength)
-          length=@oldFragmentLength  
+        unless(contentContainsFragment)
+        siteRequiresNotification=false
+          
+          if(@contentLength<@oldFragmentLength)
+          siteRequiresNotification=true 
+          end #end if @contentLength<@oldFragmentLength
+          if(siteRequiresNotification)
+          notificationNumber+=1;    
           else
-          length=@oldFragmentLength  
-          end #end if @contentLength>@oldFragmentLength
-          for i in 0..length-1 do 
             
-          end  #end for
-        notificationNumber+=1;  
-        end  #end if index==nil  
+            siteRequiresNotification=false
+            for i in 0..@contentLength-10-1 do 
+            testFragment=$content[i,10]  
+            i+=9
+            contentContainsFragment=$content.include? testFragment  
+              unless(contentContainsFragment)#if content doesn't contain fragment 
+              siteRequiresNotification=true
+              
+              break
+              end #end unless contentContainsFragment
+            end  #end for
+            if(siteRequiresNotification)
+            notificationNumber+=1  
+            end #end if siteRequiresNotification  
+          end #end if siteRequiresNotification
+        #I need to create a string & compared to content 
+        end  #end unless contentContainsFragment
 
       #i+=1
         
@@ -524,17 +540,18 @@ z="<br><br>"
     nom=site.nom 
     sitesLengthCounter+=1
       unless(sitesLengthCounter==sitesLength)
-      @ligne="<hr>"
+      @ligne="<hr class='ligne'>"
       else
       @ligne=""  
       end  # end unless sitesLengthCounter==sitesLength
     z+="site '#{nom}' has #{notificationNumber.to_s} notifications | 
-    content length : #{@contentLength.to_s} | old Fragment Length : #{@oldFragmentLength.to_s}<br> #{@ligne}"
+    content length : #{@contentLength.to_s} | old Fragment Length : #{@oldFragmentLength.to_s}<br>#{@alert} #{@ligne}"
     end #end if($e!="")
-
+    @alert=""
   
   end #end sites for each
 %>
 
 
 <%=raw z%>
+
