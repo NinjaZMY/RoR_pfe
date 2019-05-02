@@ -489,32 +489,40 @@ z="<br><br>"
     @fragments=Fragment.where(site_id:site_id)
     fragmentsLength=@fragments.length
     notificationNumber=0
-    $content=$content.to_s  
+    $content=$content.to_s
       @fragments.each do |fragment|
-      @fragmentContent=fragment.content.to_s
+      @fragmentContent=fragment.content
       contentContainsFragment = $content.include? @fragmentContent  
       @contentLength=$content.length 
       @oldFragmentLength=@fragmentContent.length
 
         unless(contentContainsFragment)
-        siteRequiresNotification=false
+        siteRequiresNotification=true
           
-          if(@contentLength<@oldFragmentLength)
-          @contentLength=@oldFragmentLength
-          end #end if @contentLength<@oldFragmentLength
+
+          
+        
           
             
-        siteRequiresNotification=false
-        for i in 0..@contentLength-10-1 do 
-        testFragment=$content[i,10]  
-        i+=9
-        contentContainsFragment=$content.include? testFragment  
-          unless(contentContainsFragment)#if content doesn't contain fragment 
-          siteRequiresNotification=true
+          siteRequiresNotification=false
+          counter=0;
+          for i in 0..@oldFragmentLength-1 do 
+          testFragment=@fragmentContent[i]  
           
-          break
-          end #end unless contentContainsFragment
-        end  #end for
+          contentContainsFragment=$content.include? testFragment  
+            unless(contentContainsFragment)#if content doesn't contain fragment 
+              counter+=1  
+              
+            end #end unless contentContainsFragment
+            if(counter>=2100)
+            siteRequiresNotification=true
+            @alert="| counter : #{counter.to_s} "
+            break
+            end  #end if counter>=2000
+          end  #end for
+
+       
+
           if(siteRequiresNotification)
           notificationNumber+=1  
           end #end if siteRequiresNotification  
