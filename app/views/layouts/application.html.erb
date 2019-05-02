@@ -524,11 +524,34 @@ z="<br><br>"
       #i+=1
         
       end #end fragments for each 
-      oldNotificationNumber=site.Notification_Number.to_i
+    oldNotificationNumber=site.Notification_Number.to_i
       if(notificationNumber!=0)
       Fragment.where(site_id:site_id).delete_all
       Fragment.create(site_id:site_id, 
       :length => 1 , :ordre => 1   , :content => $content )
+      notificationQuery=
+      Notification.having("(site_id==#{site_id})AND
+      (number==(SELECT max(number) FROM notifications where site_id=#{site_id} ))").group("id");  
+      notification=notificationQuery[0]
+      time_to_watch=site.time_to_watch                
+      actionTime=Time.now+time_to_watch 
+        #if notification is nil create notification
+        if(notification.nil?) 
+        Notification.create(updated_at:actionTime,day:1,number:notificationNumber);    
+        else #if Notification exist
+        today_day=Time.now.strftime("%d")
+        #I need to compare today s'day with notification day
+        notificationDay=notification.updated_at.strftime('%d')
+        realNotificationNumber=notification.number
+          if(today_day!=notificationDay)
+          notificationDay=1+notification.day      
+          realNotificationNumber=0  
+          end #end if today_day!=notificationDay
+        realNotificationNumber+=notificationNumber
+        notification.update(updated_at:actionTime,day:notificationDay,number:realNotificationNumber)  
+
+        end #end of if notification.nil? 
+
         if(notificationNumber>oldNotificationNumber)  
         site.update(Notification_Number:notificationNumber)
         end # if notificationNumber>oldNotificationNumber    
