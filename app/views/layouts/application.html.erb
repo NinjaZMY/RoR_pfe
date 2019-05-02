@@ -466,8 +466,10 @@ top:-3%;
 <%
 sites=Site.all
 #i=0  
+z="<br><br>"  
   sites.each do  |site| 
-  url=site.url    
+  url=site.url   
+  site_id=site.id 
     begin
     $e=""#connected
     $content = Nokogiri::HTML(open(url))
@@ -480,18 +482,26 @@ sites=Site.all
     <%
     else #if there's no problem with connection
     #i+=1  
-    fragments=Fragment.all
+    fragments=Fragment.where(site_id:site_id)
+    notificationNumber=0
+    $content=$content.to_s  
       fragments.each do |fragment|
-        if(fragment.site_id==site.id)  
-        #i+=1;
-
-        end # end if fragment.side_id == site.id  
+      fragmentContent=fragment.content 
+      index = $content.index fragmentContent  
+        if(index==nil)
+        notificationNumber+=1;  
+        end    
+      
+      #i+=1
+        
       end #end fragments for each 
+    nom=site.nom 
+    z+="site '#{nom}' has #{notificationNumber.to_s} notifications <br>"
     end #end if($e!="")
 
   
   end #end sites for each
-
-
-
 %>
+
+
+<%=raw z%>
