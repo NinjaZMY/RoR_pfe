@@ -500,27 +500,24 @@ z="<br><br>"
         siteRequiresNotification=false
           
           if(@contentLength<@oldFragmentLength)
-          siteRequiresNotification=true 
+          @contentLength=@oldFragmentLength
           end #end if @contentLength<@oldFragmentLength
-          if(siteRequiresNotification)
-          notificationNumber+=1;    
-          else
+          
             
-            siteRequiresNotification=false
-            for i in 0..@contentLength-10-1 do 
-            testFragment=$content[i,10]  
-            i+=9
-            contentContainsFragment=$content.include? testFragment  
-              unless(contentContainsFragment)#if content doesn't contain fragment 
-              siteRequiresNotification=true
-              
-              break
-              end #end unless contentContainsFragment
-            end  #end for
-            if(siteRequiresNotification)
-            notificationNumber+=1  
-            end #end if siteRequiresNotification  
-          end #end if siteRequiresNotification
+        siteRequiresNotification=false
+        for i in 0..@contentLength-10-1 do 
+        testFragment=$content[i,10]  
+        i+=9
+        contentContainsFragment=$content.include? testFragment  
+          unless(contentContainsFragment)#if content doesn't contain fragment 
+          siteRequiresNotification=true
+          
+          break
+          end #end unless contentContainsFragment
+        end  #end for
+          if(siteRequiresNotification)
+          notificationNumber+=1  
+          end #end if siteRequiresNotification  
         #I need to create a string & compared to content 
         end  #end unless contentContainsFragment
 
