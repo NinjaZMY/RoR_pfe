@@ -465,8 +465,12 @@ top:-3%;
 <%="now : "+now.to_s+" | Time to alert "+$time_to_alert.to_s%>
 <%
 sites=Site.all
+sitesLength=sites.length
+sitesLengthCounter=0
 #i=0  
 z="<br><br>"  
+@alert=""
+
   sites.each do  |site| 
   url=site.url   
   site_id=site.id 
@@ -482,21 +486,50 @@ z="<br><br>"
     <%
     else #if there's no problem with connection
     #i+=1  
-    fragments=Fragment.where(site_id:site_id)
+    @fragments=Fragment.where(site_id:site_id)
+    fragmentsLength=@fragments.length
     notificationNumber=0
     $content=$content.to_s  
-      fragments.each do |fragment|
-      fragmentContent=fragment.content 
+      @fragments.each do |fragment|
+      fragmentContent=fragment.content.to_s
       index = $content.index fragmentContent  
+      @contentLength=$content.length 
+      @oldFragmentLength=fragmentContent.length
+
         if(index==nil)
+          if(@contentLength>@oldFragmentLength)
+          length=@oldFragmentLength  
+          else
+          length=@oldFragmentLength  
+          end #end if @contentLength>@oldFragmentLength
+          for i in 0..length-1 do 
+            
+          end  #end for
         notificationNumber+=1;  
-        end    
-      
+        end  #end if index==nil  
+
       #i+=1
         
       end #end fragments for each 
+      oldNotificationNumber=site.Notification_Number.to_i
+      if(notificationNumber!=0)
+      Fragment.where(site_id:site_id).delete_all
+      Fragment.create(site_id:site_id, 
+      :length => 1 , :ordre => 1   , :content => $content )
+        if(notificationNumber>oldNotificationNumber)  
+        site.update(Notification_Number:notificationNumber)
+        end # if notificationNumber>oldNotificationNumber    
+
+      end  # end if notificationNumber !=0
     nom=site.nom 
-    z+="site '#{nom}' has #{notificationNumber.to_s} notifications <br>"
+    sitesLengthCounter+=1
+      unless(sitesLengthCounter==sitesLength)
+      @ligne="<hr>"
+      else
+      @ligne=""  
+      end  # end unless sitesLengthCounter==sitesLength
+    z+="site '#{nom}' has #{notificationNumber.to_s} notifications | 
+    content length : #{@contentLength.to_s} | old Fragment Length : #{@oldFragmentLength.to_s}<br> #{@ligne}"
     end #end if($e!="")
 
   
