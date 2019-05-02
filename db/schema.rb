@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_30_120238) do
+ActiveRecord::Schema.define(version: 2019_05_02_202744) do
 
   create_table "fragments", force: :cascade do |t|
     t.integer "ordre"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2019_04_30_120238) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "respository_id"
+    t.integer "TolerationCounter", default: 0, null: false
     t.index ["respository_id"], name: "index_sites_on_respository_id"
     t.index ["user_id"], name: "index_sites_on_user_id"
   end

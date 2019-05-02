@@ -7,7 +7,7 @@ class CreateSites < ActiveRecord::Migration[5.2]
       t.time :time_to_watch ,              null: false, default: 1.minute
       
       t.integer :Notification_Number
-      
+      t.integer :TolerationCounter , null: false ,default:0
 
       t.timestamps
 

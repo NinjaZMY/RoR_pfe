@@ -514,13 +514,13 @@ z="<br><br>"
               counter+=1  
               
             end #end unless contentContainsFragment
-            if(counter>=2100)
+            
+          end  #end for
+          if(counter>=2100)
             siteRequiresNotification=true
             @alert="| counter : #{counter.to_s} "
-            break
-            end  #end if counter>=2000
-          end  #end for
-
+            #break
+          end  #end if counter>=2100
        
 
           if(siteRequiresNotification)
@@ -537,8 +537,7 @@ z="<br><br>"
       Fragment.where(site_id:site_id).delete_all
       Fragment.create(site_id:site_id, 
       :length => 1 , :ordre => 1   , :content => $content )
-      notificationQuery=
-      Notification.having("(site_id==#{site_id})AND
+      notificationQuery=Notification.having("(site_id==#{site_id})AND
       (number==(SELECT max(number) FROM notifications where site_id=#{site_id} ))").group("id");  
       notification=notificationQuery[0]
       time_to_watch=site.time_to_watch                
