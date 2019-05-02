@@ -472,114 +472,130 @@ z="<br><br>"
 @alert=""
 
   sites.each do  |site| 
-  url=site.url   
   site_id=site.id 
-    begin
-    $e=""#connected
-    $content = Nokogiri::HTML(open(url))
-    rescue Exception => $e
-    end  #end nokogiri content extraction     
-    if ($e!="") #if there's a connection problem , content cannot be loaded 
-    error="<h4>There 's a connection problem related to '#{url}'<br> #{$e} </h4>"  
-    %>
-    <%= raw error%>
-    <%
-    else #if there's no problem with connection
-    #i+=1  
-    @fragments=Fragment.where(site_id:site_id)
-    fragmentsLength=@fragments.length
-    notificationNumber=0
-    $content=$content.to_s
-      @fragments.each do |fragment|
-      @fragmentContent=fragment.content
-      contentContainsFragment = $content.include? @fragmentContent  
-      @contentLength=$content.length 
-      @oldFragmentLength=@fragmentContent.length
-      tolerationCounter=site.TolerationCounter  
-        unless(contentContainsFragment)
-        siteRequiresNotification=true
-          
+  notificationQuery=Notification.having("(site_id==#{site_id})AND
+  (day==(SELECT max(day) FROM notifications where site_id=#{site_id} ))").group("id");  
+  notification=notificationQuery[0]
+  #if notification.nil? go forward
+  #else check timing if timing (time.now) > notificationTime go forward
+  urlWatch=true
+    unless(notification.nil?)
+    time=Time.now
+    actionTime=notification.updated_at+site.time_to_watch
+      if(time<actionTime)
+      urlWatch=false  
+      end 
+    end #end unless notification.nil?  
+    if(urlWatch)  
+    url=site.url   
+      begin
+      $e=""#connected
+      $content = Nokogiri::HTML(open(url))
+      rescue Exception => $e
+      end  #end nokogiri content extraction     
+      if ($e!="") #if there's a connection problem , content cannot be loaded 
+      error="<h4>There 's a connection problem related to '#{url}'<br> #{$e} </h4>"  
+      %>
+      <%= raw error%>
+      <%
+      else #if there's no problem with connection
+      #i+=1  
+      @fragments=Fragment.where(site_id:site_id)
+      fragmentsLength=@fragments.length
+      notificationNumber=0
+      $content=$content.to_s
+        @fragments.each do |fragment|
+        @fragmentContent=fragment.content
+        contentContainsFragment = $content.include? @fragmentContent  
+        @contentLength=$content.length 
+        @oldFragmentLength=@fragmentContent.length
+        tolerationCounter=site.TolerationCounter  
+          unless(contentContainsFragment)
+          siteRequiresNotification=true
+            
 
-          
-        
+            
           
             
-          siteRequiresNotification=false
-          counter=0;
-          for i in 0..@oldFragmentLength-10-1 do 
-          testFragment=@fragmentContent[i,10]  
-          i+=10
-          contentContainsFragment=$content.include? testFragment  
-            unless(contentContainsFragment)#if content doesn't contain fragment 
-              counter+=1  
               
-            end #end unless contentContainsFragment
-            
-          end  #end for
-          if(counter>tolerationCounter)
-            siteRequiresNotification=true
-            @alert="| counter : #{counter.to_s} "
-            #break
-          end  #end if counter>=2100
-       
-
-          if(siteRequiresNotification)
-          notificationNumber+=1  
-          end #end if siteRequiresNotification  
-        #I need to create a string & compared to content 
-        end  #end unless contentContainsFragment
-
-      #i+=1
+            siteRequiresNotification=false
+            counter=0;
+            for i in 0..@oldFragmentLength-10-1 do 
+            testFragment=@fragmentContent[i,10]  
+            i+=10
+            contentContainsFragment=$content.include? testFragment  
+              unless(contentContainsFragment)#if content doesn't contain fragment 
+                counter+=1  
+                
+              end #end unless contentContainsFragment
+              
+            end  #end for
+            if(counter>tolerationCounter)
+              siteRequiresNotification=true
+              @alert="| counter : #{counter.to_s} "
+              #break
+            end  #end if counter>=2100
         
-      end #end fragments for each 
-    oldNotificationNumber=site.Notification_Number.to_i
-      if(notificationNumber>0)
-      Fragment.where(site_id:site_id).delete_all
-      Fragment.create(site_id:site_id, 
-      :length => 1 , :ordre => 1   , :content => $content )
-      notificationQuery=Notification.having("(site_id==#{site_id})AND
-      (number==(SELECT max(number) FROM notifications where site_id=#{site_id} ))").group("id");  
-      notification=notificationQuery[0]
-      time_to_watch=site.time_to_watch                
-      actionTime=Time.now+time_to_watch 
-      @alert+="| notification : #{notification.class}"
-        #if notification is nil create notification
-        if(notification.nil?) 
-        Notification.create(updated_at:actionTime,day:1,number:notificationNumber,site_id:site_id);    
-        else #if Notification exist
-        today_day=Time.now.strftime("%d")
-        #I need to compare today s'day with notification day
-        notificationDay=notification.updated_at.strftime('%d')
-        realNotificationNumber=notification.number
-          if(today_day!=notificationDay)
-          notificationDay=1+notification.day      
-          realNotificationNumber=notificationNumber
-          notification.create(updated_at:actionTime,day:notificationDay,number:realNotificationNumber,site_id:site_id)
-          else#if today_day is the same day
-          realNotificationNumber+=notificationNumber
-          notification.update(updated_at:actionTime,day:notificationDay,number:realNotificationNumber,site_id:site_id)    
-          end #end if today_day!=notificationDay
+
+            if(siteRequiresNotification)
+            notificationNumber+=1  
+            end #end if siteRequiresNotification  
+          #I need to create a string & compared to content 
+          end  #end unless contentContainsFragment
+
+        #i+=1
+          
+        end #end fragments for each 
+      oldNotificationNumber=site.Notification_Number.to_i
+        if(notificationNumber>0)
+        Fragment.where(site_id:site_id).delete_all
+        Fragment.create(site_id:site_id, 
+        :length => 1 , :ordre => 1   , :content => $content )
+        notificationQuery=Notification.having("(site_id==#{site_id})AND
+        (day==(SELECT max(day) FROM notifications where site_id=#{site_id} ))").group("id");  
+        notification=notificationQuery[0]
+        time_to_watch=site.time_to_watch                
+        actionTime=Time.now+time_to_watch
+        #actionTime=Time.now+5.minute 
+        @alert+="| notification : #{notification.class}"
+        Notification.record_timestamps=false  
+          #if notification is nil create notification
+          if(notification.nil?) 
+          Notification.create(updated_at:actionTime,day:1,number:notificationNumber,site_id:site_id);    
+          else #if Notification exist
+          today_day=Time.now.strftime("%d")
+          #I need to compare today s'day with notification day
+          notificationDay=notification.updated_at.strftime('%d')
+          realNotificationNumber=notification.number
+            if(today_day!=notificationDay)
+            notificationDay=1+notification.day      
+            realNotificationNumber=notificationNumber
+            notification.create(updated_at:actionTime,day:notificationDay,number:realNotificationNumber,site_id:site_id)
+            else#if today_day is the same day
+            realNotificationNumber+=notificationNumber
+            notification.update(updated_at:actionTime,number:realNotificationNumber,site_id:site_id)    
+            end #end if today_day!=notificationDay
 
 
-        end #end of if notification.nil? 
+          end #end of if notification.nil? 
 
-        if(notificationNumber>oldNotificationNumber)  
-        site.update(Notification_Number:notificationNumber)
-        end # if notificationNumber>oldNotificationNumber    
+          if(notificationNumber>oldNotificationNumber)  
+          site.update(Notification_Number:notificationNumber)
+          end # if notificationNumber>oldNotificationNumber    
 
-      end  # end if notificationNumber !=0
-    nom=site.nom 
-    sitesLengthCounter+=1
-      unless(sitesLengthCounter==sitesLength)
-      @ligne="<hr class='ligne'>"
-      else
-      @ligne=""  
-      end  # end unless sitesLengthCounter==sitesLength
-    z+="site '#{nom}' has #{notificationNumber.to_s} notifications | 
-    content length : #{@contentLength.to_s} | old Fragment Length : #{@oldFragmentLength.to_s}<br>#{@alert} #{@ligne}"
-    end #end if($e!="")
+        end  # end if notificationNumber !=0
+      nom=site.nom 
+      sitesLengthCounter+=1
+        unless(sitesLengthCounter==sitesLength)
+        @ligne="<hr class='ligne'>"
+        else
+        @ligne=""  
+        end  # end unless sitesLengthCounter==sitesLength
+      z+="site '#{nom}' has #{notificationNumber.to_s} notifications | 
+      content length : #{@contentLength.to_s} | old Fragment Length : #{@oldFragmentLength.to_s}<br>#{@alert} #{@ligne}"
+      end #end if($e!="")
     @alert=""
-  
+    end#end if urlWatch  
   end #end sites for each
 %>
 
