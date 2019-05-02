@@ -480,7 +480,13 @@ sites=Site.all
     <%
     else #if there's no problem with connection
     #i+=1  
-    
+    fragments=Fragment.all
+      fragments.each do |fragment|
+        if(fragment.site_id==site.id)  
+        #i+=1;
+
+        end # end if fragment.side_id == site.id  
+      end #end fragments for each 
     end #end if($e!="")
 
   
