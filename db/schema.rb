@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_02_202744) do
+ActiveRecord::Schema.define(version: 2019_05_03_114847) do
 
   create_table "fragments", force: :cascade do |t|
     t.integer "ordre"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2019_05_02_202744) do
     t.string "nom"
     t.string "url"
     t.text "img"
-    t.integer "time_to_watch", default: 0, null: false
+    t.integer "time_to_watch", default: 300, null: false
     t.string "Respository", default: "", null: false
     t.integer "Notification_Number"
     t.datetime "created_at", null: false

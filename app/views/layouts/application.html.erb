@@ -561,7 +561,7 @@ z="<br><br>"
         Notification.record_timestamps=false  
           #if notification is nil create notification
           if(notification.nil?) 
-          Notification.create(updated_at:actionTime,day:1,number:notificationNumber,site_id:site_id);    
+          Notification.create(created_at:Time.now,updated_at:actionTime,day:1,number:notificationNumber,site_id:site_id);    
           else #if Notification exist
           today_day=Time.now.strftime("%d")
           #I need to compare today s'day with notification day
