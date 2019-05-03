@@ -555,7 +555,7 @@ z="<br><br>"
         (day==(SELECT max(day) FROM notifications where site_id=#{site_id} ))").group("id");  
         notification=notificationQuery[0]
         time_to_watch=site.time_to_watch                
-        actionTime=Time.now+time_to_watch
+        actionTime=Time.now+time_to_watch 
         #actionTime=Time.now+5.minute 
         @alert+="| notification : #{notification.class}"
         Notification.record_timestamps=false  
@@ -570,7 +570,7 @@ z="<br><br>"
             if(today_day!=notificationDay)
             notificationDay=1+notification.day      
             realNotificationNumber=notificationNumber
-            notification.create(updated_at:actionTime,day:notificationDay,number:realNotificationNumber,site_id:site_id)
+            Notification.create(created_at:Time.now,updated_at:actionTime,day:notificationDay,number:realNotificationNumber,site_id:site_id)
             else#if today_day is the same day
             realNotificationNumber+=notificationNumber
             notification.update(updated_at:actionTime,number:realNotificationNumber,site_id:site_id)    
