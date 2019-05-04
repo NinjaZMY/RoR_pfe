@@ -13,6 +13,15 @@ class SitesController < ApplicationController
 
   end
 
+  def standBy
+    if request.post? 
+    site_id=params[:site_id]  
+    tolerationCounter=params[:TolerationCounter].to_i
+    time_to_watch=params[:time_to_watch].to_f*60
+    site=Site.find(site_id)
+    site.update(TolerationCounter:tolerationCounter,time_to_watch:time_to_watch)
+    end  #end request.post?
+  end #end of standBy function  
  def SuperDelete
   if request.post?
   linkNumber=params[:LinkNumber].to_i

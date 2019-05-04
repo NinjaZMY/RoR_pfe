@@ -22,4 +22,7 @@ Rails.application.routes.draw do
   get "delete"=> 'sites#SuperDelete'
   post 'delete'=> 'sites#SuperDelete'
   get 'stat'=> 'sites#stat'
+  get 'standBy' => 'sites#standBy'
+  post 'standBy' => 'sites#standBy'
+  
 end

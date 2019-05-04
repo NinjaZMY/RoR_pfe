@@ -195,7 +195,13 @@ width: 393px;
 color: black;
 
 }
-
+.standByInput
+{
+width: 200px;
+position: relative;
+bottom: 37px;
+left: 188px;
+}
 </style>
   <body >
     <%$pageUrl=request.original_fullpath 
@@ -423,7 +429,8 @@ color: black;
                           </button>
                       <br>
                           
-                                  <button style="height:20px" type="button" class="popover-btn btn btn-secondary">
+                                  <button id="StandBy<%=popover_index%>" 
+                                  style="height:20px" type="button" class="popover-btn btn btn-secondary">
                                       <font style="position:relative;top:-8px">
                                       Set up Standby
                                       </font>
@@ -489,8 +496,11 @@ color: black;
                location.href="<%=@path%>";
 
               }
-
-    
+              document.getElementById('StandBy<%=popover_index%>').onclick=function()
+              {
+               location.href="<%=standBy_path+'?'+site.id.to_s%>" 
+              }
+              
               </script>    
               
 

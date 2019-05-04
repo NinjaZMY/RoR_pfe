@@ -740,6 +740,50 @@ position: absolute;
 top: 134px;
 width: 56.48%;
 left: 376px;
-height: 531px;
+height: 313px;
+overflow-x: hidden;
 
+}
+
+
+
+.standByLabel
+{
+position: relative;
+
+}
+
+.TolerationCounterLabel
+{
+position: relative;
+left: 31px;  
+}
+
+.StandByDiv
+{
+position: relative;
+left: 169px;  
+top: 43px;
+}
+
+#SubmitButtonStandBy
+{
+width: 200px;  
+position: relative;
+top: 44px;
+}
+
+#labelStandBy
+{
+position: absolute;
+top: 105px;
+left: 377px;
+border: 1px solid;
+width: 725px;
+text-align: center;
+border-color: black;
+border-radius: 0.25rem;
+opacity: 0.7;
+color: white;
+background-color: #504c4c;  
 }

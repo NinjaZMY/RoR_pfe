@@ -1,0 +1,54 @@
+<%
+location=request.original_fullpath
+
+is_a_clear_location=!(location.include? '?')
+
+if(is_a_clear_location)
+last_site_id=Site.last.id.to_s
+%>
+    <script>
+    location.href="<%=location%>?<%=last_site_id%>"
+    </script>
+<%
+else#if location contains id 
+index=location.index '?'
+site_id=(location[index+1,location.length]).to_i
+length=Site.where(id:site_id).length
+    if(length==0)
+    id=Site.last.id.to_s
+    %>
+    <script>
+    location.href="<%=standBy_path%>?<%=id%>"
+    </script>
+    <%
+    end#end if length==0    
+end #end if is_a_clear_location    
+site=Site.find(site_id)
+label=site.nom
+tolerationCounter=site.TolerationCounter
+time_to_watch=site.time_to_watch/60.0
+
+%>
+
+<h4 id="labelStandBy">
+<%=label%>
+</h4>
+<div align=center class="RespositoryList StatContainer">
+
+    <form method="post">
+        <div align="left" class="StandByDiv">
+                <label class="standByLabel">
+                Time to watch (in minutes)
+                </label>
+            <input name="time_to_watch" required type="number" value="<%=time_to_watch%>" class="standByInput form-control button">   
+                <label class="TolerationCounterLabel standByLabel">
+                Toleration Counter
+                </label>
+            <input name="TolerationCounter" required type="number" value="<%=tolerationCounter%>" class="standByInput form-control button">   
+        </div>
+    <input type=hidden name="site_id"  value="<%=site_id%>" >
+    <input type=submit id='SubmitButtonStandBy' value="Set up Standby" class="btn btn-outline-dark button form-control">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>    
+    </form>    
+</div> <!-- end of div class="RespositoryList StatContainer" -->
+<%=params%>
