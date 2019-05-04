@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   post "move" => "sites#move"
   get "delete"=> 'sites#SuperDelete'
   post 'delete'=> 'sites#SuperDelete'
+  get 'stat'=> 'sites#stat'
 end

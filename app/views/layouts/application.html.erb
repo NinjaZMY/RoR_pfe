@@ -159,7 +159,7 @@ color: #2b2929;
 
     background-image: url(/assets/app.jpg);
     background-size: 100%;
-    height: 100%;
+    height: 665px;
     width:100%
   }
 .SuperDeleteForm
@@ -294,13 +294,18 @@ color: black;
       length=Notification.all.length
       unless(length==0) # if there's at least one Notification
       %>
-        <div type="button" data-toggle="modal">
+        <div id="StatLink" type="button" data-toggle="modal">
         <img src="/assets/stat.png"  class="StatMenu"     >
           <button class="Statistics button btn btn-outline-dark">
           Statistics
           </button>
         </div>    
-      
+          <script>
+          document.getElementById('StatLink').onclick=function()
+          {
+           location.href="<%=stat_path%>" 
+          }
+          </script>
         <%end #end unless length==0%>
           <div class="d-none"> 
             <div id="header" align='center' style="middle-align:center" >
@@ -506,7 +511,6 @@ color: black;
   
   </html>
   <%$url=request.original_url%>
-<%="now : "+now.to_s+" | Time to alert "+$time_to_alert.to_s%>
 <%
 sites=Site.all
 sitesLength=sites.length
@@ -648,5 +652,4 @@ z="<br><br>"
 %>
 
 
-<%=raw z%>
 

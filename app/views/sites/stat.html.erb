@@ -1,0 +1,147 @@
+<script>
+document.getElementById('StatLink').classList+='d-none'
+</script>
+<div class="RespositoryList StatContainer">
+
+<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+
+
+
+
+
+</div> <!--end of div class='RespositoryList' -->
+<%
+user_id=current_user[:id]
+sites=Site.where(user_id:user_id)
+length=sites.length 
+#data=""
+dataArray=[]
+counter=0
+    sites.each do |site| 
+    counter+=1
+    site_id=site.id 
+    label=site.nom
+    notifications=Notification.where(site_id:site_id).select("SUM(notifications.number) as number")
+    notificationNumber=notifications.first.number.to_f       
+    totalNotification=Notification.all.select("SUM(notifications.number) as number") 
+    totalNotificationNumber=totalNotification.first.number    
+    percentage=notificationNumber/totalNotificationNumber*100
+    data={}
+    data[:name]=label
+    data[:y]=percentage
+    dataArray[counter] =data 
+    #data+="{ name : '#{label}' , y : #{percentage.to_s}"        
+        #unless(counter==length) #if counter is different than length 
+        #data+="},"    
+        #else # if counter == length 
+        #data+="}"    
+        #end #end unless counter == length   
+
+    end #end sites.each    
+condition=false 
+start=1 
+    while(condition==false ) do 
+    max=dataArray[start][:y]
+    index=start
+
+        for i in start+1..length do 
+        counterValue=dataArray[i][:y]
+            if(max<counterValue)
+             max=counterValue
+             index=i
+            end # end if counterValue<nextValue     
+        end #end for     
+    temp=dataArray[start][:y]
+    dataArray[start][:y]=max 
+    dataArray[index][:y]=temp
+    start+=1
+        if(start==length)
+        condition=true
+        end # end if start==length    
+    end #end while 
+chartData=""
+    for i in 1 ..length  do
+    value=dataArray[i] 
+    name=value[:name]
+    percentage=value[:y].to_s
+    chartData+="{ name : '#{name}' , y : #{percentage}"
+        unless(i==length) #if counter is different than length 
+        chartData+="},"    
+        else # if counter == length 
+        chartData+="}"    
+        end #end unless i == length     
+    end #end for     
+%>
+<script>
+// Make monochrome colors
+var pieColors = (function () {
+    var colors = [],
+        base = '#020810',
+        i;
+
+    for (i = 0; i < 10; i += 1) {
+        // Start out with a darkened base color (negative brighten), and end
+        // up with a much brighter color
+        colors.push(Highcharts.Color(base).brighten((i ) /7).get());
+    }
+    return colors;
+}());
+
+// Build the chart
+Highcharts.chart('container', {
+   
+    chart: {
+        backgroundColor:'transparent',
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Repartition of Notifications Number per website '
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            colors: pieColors,
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b><br>{point.percentage:.1f} %',
+                distance: -50,
+                filter: {
+                    property: 'percentage',
+                    operator: '>',
+                    value: 4
+                }
+            }
+        }
+    },
+    series: [{
+        name: 'percentage of Notifications Numbers',
+        data: [
+            <%=raw chartData%>
+        ]
+    }]
+});
+/*{ name: 'Chrome', y: 61.41 },
+            { name: 'Internet Explorer', y: 11.84 },
+            { name: 'Firefox', y: 10.85 },
+            { name: 'Edge', y: 4.67 },
+            { name: 'Safari', y: 4.18 },
+            { name: 'Other', y: 7.05 }*/
+</script>
+
+<%
+counter=0
+    sites.each do |site| 
+    counter+=1 
+    %>
+        
+    <%
+    end #end sites.each 
+%>
