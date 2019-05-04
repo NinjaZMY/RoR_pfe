@@ -12,12 +12,16 @@ sites=Site.where(user_id:user_id)
     sites.each do |site| 
     counter+=1 
     label=site.nom
+    site_id=site.id
     data=[]
      notification=Notification.where(site_id:1).select("max(day)as day")
      numberOfDays=notification.first.day
      days=[]
         for i in 1..numberOfDays do 
         days[i-1]=i
+        notification=Notification.where("(site_id=#{site_id})AND(day=#{i})").select("number")
+        number=notification.first.number
+        data[i-1]=number
         end #end if i in 1..numberOfDays   
     %>
     <div class="" id="container<%=counter%>"></div>
@@ -25,7 +29,8 @@ sites=Site.where(user_id:user_id)
     <script>
     chart=Highcharts.chart('container<%=counter%>', {
         chart: {
-            backgroundColor: 'transparent'
+            backgroundColor: 'transparent',
+            colors: 'black'
         }
         ,
         title: {
@@ -38,7 +43,7 @@ sites=Site.where(user_id:user_id)
 
         yAxis: {
             title: {
-                text: 'Number of Notifications'
+                text: 'Notification Number'
             }
         },
         xAxis: {
@@ -64,31 +69,18 @@ sites=Site.where(user_id:user_id)
                     connectorAllowed: false
                 } , 
                 
+            color: 'black'
+        
 
             } ,
         },
 
         series: [
-        <%
-        for i in 1..5 do
-        data.clear
-        for j in 0..7 do
-            
-            data[j]=(rand*i+6).to_i 
-            if(data[j]<data[j-1]&&j>0) 
-            
-            data[j]=data.max 
-            end #end if 
-            if(data[j]>=10&&data[j-1]>=10)
-            data[j]=rand(i)+6.to_i  
-            end #end if 
-        end # end for j
-        %>
-        { name : 'data <%=i%>' ,
+
+        { name : '<%=label%> s\' Notification Number' ,
             data : <%=data%>  
-        } ,  
-        <%
-        end%>
+        } 
+       
         ],
 
         responsive: {
