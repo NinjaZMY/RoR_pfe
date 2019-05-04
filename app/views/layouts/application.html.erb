@@ -167,6 +167,35 @@ color: #2b2929;
 position: relative;
 top:-3%;
 }
+.Statistics
+{
+position: absolute;
+left: 242px;
+top: 7.5%;
+color: black;
+font-size: 12px;
+}
+
+.StatMenu
+{
+top: 3px;
+position: absolute;
+height: 41px;
+cursor: pointer;
+left: 260px;
+}
+
+.ScrapButton
+{
+position: relative;
+left: 15%;
+top: 7px;
+font-size: 19px;
+width: 393px;
+color: black;
+
+}
+
 </style>
   <body >
     <%$pageUrl=request.original_fullpath 
@@ -254,11 +283,26 @@ top:-3%;
     %>
     
     <div id="BGapp">
-      <div id="usernav"><font id="usernavtext"><%="welcome "+current_user[:email]%></font>
-      </div>
+        <div id="usernav">
+          <font id="usernavtext">
+          <%="welcome "+current_user[:email]%>
+          </font>
+        </div>
       <%= link_to "LOG OUT", logout_path , method: :delete,
-        class: "button btn btn-secondary" , id:"logout" %>
-      <div class="d-none"> 
+      class: "button btn btn-secondary" , id:"logout" %>
+      <%
+      length=Notification.all.length
+      unless(length==0) # if there's at least one Notification
+      %>
+        <div type="button" data-toggle="modal">
+        <img src="/assets/stat.png"  class="StatMenu"     >
+          <button class="Statistics button btn btn-outline-dark">
+          Statistics
+          </button>
+        </div>    
+      
+        <%end #end unless length==0%>
+          <div class="d-none"> 
             <div id="header" align='center' style="middle-align:center" >
               <h2 style="position:relative;bottom:15px;left:0%;">
               Actions

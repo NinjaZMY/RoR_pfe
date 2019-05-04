@@ -450,7 +450,7 @@ height:44px;
 position:relative;
 top: 39px;
 left:0px;
-height:630px;
+height: 621px;
 overflow-y:auto;
 border-width:4px;
 width: 241px;
@@ -478,12 +478,12 @@ opacity: 0.7;
 
 #fragment
 {
-    position: absolute;
-    left: 18.5%;
-    width: 81.5%;
-    top: 41%;
-    overflow-y: auto;
-    height: 395px;
+position: absolute;
+left: 18.5%;
+width: 81.5%;
+top: 23%;
+overflow-y: auto;
+height: 515px;
 
 }
 
@@ -504,6 +504,7 @@ width: 241px;
 position: relative;
 top: 7.5px;
 color: honeydew;
+
 }
 
 .navlink
@@ -526,11 +527,11 @@ top:0px;
 
 .ScrapMethod
 {
-font-size: 28px;
+font-size: 20px;
 position: absolute;
-top: 14%;
-left: 30%;
-color:black;
+top: 9%;
+left: 35%;
+color: black;
 }
 
 .Connexion_error
@@ -591,7 +592,7 @@ bottom: 0px;
 .RespositoryNav
 {
 position: absolute;
-top: 44px;
+top: 67px;
 left: 258px;
 width: 57.86%;
 }
@@ -606,13 +607,13 @@ top: 1%;
 .RespositoryList
 {
 position: absolute;
-top: 85px;
+top: 108px;
 left: 258px;
 color: black;
 background-color: lightgray;
 opacity: 0.7;
 width: 58%;
-height: 584px;
+height: 559px; 
 overflow-y: auto;
 border: 1px solid transparent;
 line-height: 1.5;
@@ -726,3 +727,10 @@ left: -13px;
 {
 border: solid 1px;
 }
+
+
+.Statistics:hover,.ScrapButton:hover
+{
+  color:white; 
+}
+
