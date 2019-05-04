@@ -5,15 +5,119 @@ document.getElementById('StatLink').classList+='d-none'
 
 <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 
+<%
+counter=0
+user_id=current_user[:id]
+sites=Site.where(user_id:user_id)    
+    sites.each do |site| 
+    counter+=1 
+    label=site.nom
+    data=[]
+     notification=Notification.where(site_id:1).select("max(day)as day")
+     numberOfDays=notification.first.day
+     days=[]
+        for i in 1..numberOfDays do 
+        days[i-1]=i
+        end #end if i in 1..numberOfDays   
+    %>
+    <div class="" id="container<%=counter%>"></div>
+    
+    <script>
+    chart=Highcharts.chart('container<%=counter%>', {
+        chart: {
+            backgroundColor: 'transparent'
+        }
+        ,
+        title: {
+            text: 'Number of Notifications By Days related to the <%=label%> website'
+        },
 
+        subtitle: {
+            text: 'Source: Axian White Team application'
+        },
+
+        yAxis: {
+            title: {
+                text: 'Number of Notifications'
+            }
+        },
+        xAxis: {
+        title:{
+        text : 'Number of days' ,
+        } ,
+        categories : <%=raw days%>
+        ,
+        max : <%=numberOfDays-1%>,
+        endOnTick:true
+
+        }
+        ,
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                } , 
+                
+
+            } ,
+        },
+
+        series: [
+        <%
+        for i in 1..5 do
+        data.clear
+        for j in 0..7 do
+            
+            data[j]=(rand*i+6).to_i 
+            if(data[j]<data[j-1]&&j>0) 
+            
+            data[j]=data.max 
+            end #end if 
+            if(data[j]>=10&&data[j-1]>=10)
+            data[j]=rand(i)+6.to_i  
+            end #end if 
+        end # end for j
+        %>
+        { name : 'data <%=i%>' ,
+            data : <%=data%>  
+        } ,  
+        <%
+        end%>
+        ],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+
+    });    
+    </script>
+    <%
+    end #end sites.each 
+%>
 
 
 
 
 </div> <!--end of div class='RespositoryList' -->
 <%
-user_id=current_user[:id]
-sites=Site.where(user_id:user_id)
+
 length=sites.length 
 #data=""
 dataArray=[]
@@ -136,12 +240,3 @@ Highcharts.chart('container', {
             { name: 'Other', y: 7.05 }*/
 </script>
 
-<%
-counter=0
-    sites.each do |site| 
-    counter+=1 
-    %>
-        
-    <%
-    end #end sites.each 
-%>
