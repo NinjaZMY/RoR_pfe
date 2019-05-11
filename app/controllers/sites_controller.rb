@@ -123,9 +123,9 @@ class SitesController < ApplicationController
      
   
     #:nom , :url , :user_id
-    
+    time_to_watch=300
     site = Site.create(:nom => @nom , :url => @site_url ,
-      :user_id => @user_id , :respository_id=> 1 )
+      :user_id => @user_id , :respository_id=> 1 , :time_to_watch => time_to_watch )
     # do the next thing
       
 
