@@ -89,7 +89,7 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
   #in order to automatically load assets to heroku application
-  config.serve_static_assets = true
+  config.serve_static_files = true 
   config.assets.digest = true
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
