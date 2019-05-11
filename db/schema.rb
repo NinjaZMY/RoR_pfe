@@ -48,7 +48,6 @@ ActiveRecord::Schema.define(version: 2019_05_03_114847) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "respository_id"
-    t.integer "TolerationCounter", default: 0, null: false
     t.index ["respository_id"], name: "index_sites_on_respository_id"
     t.index ["user_id"], name: "index_sites_on_user_id"
   end
