@@ -60,7 +60,7 @@ end
 
 group :production do 
   gem 'pg' , '>= 0.18'#a postgresql gem 
-
+  gem 'rails_12factor'
 
 
 end  
