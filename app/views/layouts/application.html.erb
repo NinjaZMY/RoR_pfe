@@ -110,7 +110,7 @@ body
  .popover  
 {
 max-width:100%;
-height:32%;
+height:28%;
 background-color:lightgray;
 opacity:0.9;
 position:relative;
@@ -387,7 +387,7 @@ left: 188px;
                 {
                     
                 position:relative;
-                top:-4px;
+                top: 12px;
                     
                     
 
@@ -442,14 +442,32 @@ left: 188px;
                                   </button>
                               <br>
                                   
-                      <%= button_to  'Update Link', edit_site_path(site), method: 'get',
-                      style:"position:relative;",class:"popover-btn btn btn-secondary"
-                      %>
+                      
 
-                      <%= button_to 'Delete Link', site_path(site), method: 'delete',
-                      data: { confirm: "Do You Really Want to delete the link of #{site[:nom]} ?" },
-                      class:"popover-btn btn btn-secondary"   %>
+                                  <button id="Update<%=popover_index%>" 
+                                  style="height:20px" type="button" class="popover-btn btn btn-secondary">
+                                      <font style="position:relative;top:-8px">
+                                      Update Link
+                                      </font>
+                                  </button>
+                              <br>
 
+
+
+                                  <button id="Delete<%=popover_index%>" 
+                                  style="height:20px" type="button" class="popover-btn btn btn-secondary">
+                                      <font style="position:relative;top:-8px">
+                                      Delete Link
+                                      </font>
+                                  </button>
+                               
+
+
+                              <%= button_to 'Delete Link' , site_path(site), method: 'delete', 
+                               id:"deleteRequest#{popover_index}",
+                              data: { confirm: "Do You Really Want to delete the link of #{site[:nom]} ?" },
+                              class:"popover-btn btn btn-secondary d-none"   %>
+                                
                                  
                           
                   </div>
@@ -486,6 +504,26 @@ left: 188px;
 
               }
               );
+
+
+              
+              document.getElementById('Delete<%=popover_index%>').onclick=function()
+              {
+
+              deleteAction=document.getElementById('deleteRequest<%=popover_index%>')     ;        
+              deleteAction.click();
+              }
+              
+              
+              document.getElementById('Update<%=popover_index%>').onclick=function()
+              {
+
+              location.href="<%=edit_site_path(site)%>";
+
+              }
+
+
+
 
 
               document.getElementById('Scrap<%=popover_index%>').onclick=function()
