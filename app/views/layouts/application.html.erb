@@ -410,9 +410,7 @@ left: 188px;
                   <div id="popover-content<%=popover_index%>" align=center  >
                           
                     
-                  <%= button_to  'Update Link', edit_site_path(site), method: 'get',
-                  style:"position:relative;",class:"popover-btn btn btn-secondary"
-                  %>
+
                   
                   
                   
@@ -425,6 +423,7 @@ left: 188px;
                                   Scrap Website 
                                   </font>
                           </button>
+
                       <br>
                     
                           <button  id="Respository<%=popover_index%>"  style="height:20px" type="button" 
@@ -442,9 +441,14 @@ left: 188px;
                                       </font>
                                   </button>
                               <br>
-                                  <%= button_to 'Delete Link', site_path(site), method: 'delete',
-                                  data: { confirm: "Do You Really Want to delete the link of #{site[:nom]} ?" },
-                                  class:"popover-btn btn btn-secondary"   %>
+                                  
+                      <%= button_to  'Update Link', edit_site_path(site), method: 'get',
+                      style:"position:relative;",class:"popover-btn btn btn-secondary"
+                      %>
+
+                      <%= button_to 'Delete Link', site_path(site), method: 'delete',
+                      data: { confirm: "Do You Really Want to delete the link of #{site[:nom]} ?" },
+                      class:"popover-btn btn btn-secondary"   %>
 
                                  
                           
