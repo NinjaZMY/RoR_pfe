@@ -40,7 +40,7 @@ condition=(defined?($time_to_alert)==nil)
     box-sizing: border-box;
     color:white;
     vertical-align: middle;
-    height: 40px;
+    height: 45px;
     display: inline-block;
     text-decoration:none;
   }
@@ -208,6 +208,28 @@ position: relative;
 bottom: 37px;
 left: 188px;
 }
+
+ .btn-facebook, .btn-twitter 
+{
+border: 5px solid;  
+border-radius:30px;
+background-color:#2560b2;
+border-color: #a6bacc;
+height: 40px;
+width: 40px;
+background-repeat: no-repeat;
+background-position: 50% 50%;
+background-attachment: scroll;
+padding: 16px;
+}
+
+
+ a.btn-facebook :hover, a.btn-twitter :hover
+{
+background-color: 	#a20067;
+height: 45px;
+border: 5px solid; 
+}
 </style>
   <body >
     <%$pageUrl=request.original_fullpath 
@@ -358,7 +380,7 @@ left: 188px;
               notificationNumber=site.Notification_Number.to_i
               notification=""
               unless(notificationNumber==0)
-               notification="<strong class='Notification navlink '>"+notificationNumber.to_s+"</strong>" 
+               notification="<font class='Notification navlink '>"+notificationNumber.to_s+"</font>" 
                 if(@respository!="")
                 @FolderClass="InsideFolderWithNotification"
                 else # we're inside Root 
