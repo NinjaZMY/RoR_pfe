@@ -816,7 +816,7 @@ overflow-x: hidden;
 {
 position: absolute;
 top: 865px;
-right: 165px;
+right:140px;
 
 }
 
@@ -828,7 +828,7 @@ right: 165px;
 #TwitterLink
 {
   position: relative;
-  right: -8px;
+  
 }
 
 .btn.btn-facebook 
@@ -841,4 +841,36 @@ right: 165px;
   background-image: url(/assets/twitterLink.png);
 
  }
+.btn-linkedIn
+{
+background-image:url(/assets/linkedinLink.png)
+}
 
+
+
+
+.axians1{
+position: absolute;
+top: 65px;
+left: 212px;
+width: 130px;
+opacity: 0;
+}
+
+.axians3
+{
+position: absolute;
+top: 57px;
+left: 200px;
+width: 130px;  
+opacity: 0;
+}
+
+.axians4
+{
+position: absolute;
+top: 65px;
+left: 211px;
+width: 132px;
+opacity: 0;  
+}
