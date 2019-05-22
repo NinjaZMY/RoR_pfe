@@ -168,11 +168,12 @@ top: 25px;
   }
   .textwidget4 
   {
-      position: absolute;
-      right: 110px;
-      top: 1639px;
-      font-size: 14px;
-      color: lightgray;
+  position: absolute;
+  right: 110px;
+  top: 1639px;
+  font-size: 12px;
+  font-family: sans-serif;
+  color: lightgray;
   }
   .textwidget3
   {
@@ -320,7 +321,7 @@ top: 25px;
   .wpcf7-list-item-label 
   {
     position: relative;
-    left:470px;
+    left: 461px;
   }
 
   [name="rgpd[]"]
@@ -347,9 +348,9 @@ top: 25px;
     left: 400px;
     position: relative;
     bottom: 244px;
-    font-size: 14px;
+    font-size: 12px;
     font-family: sans-serif;
-    width: 65%;
+    width: 55%;
 }
 
 .navFooter:hover
@@ -878,19 +879,40 @@ opacity: 0;
 .SocialMediaFooter4
 {
 position: relative;
-bottom: 102px;
-left: 174px;
+bottom: 90px;
+left: 446px;
+zoom: 47%;
+width: 50%;
 }
 
 
 .FooterHeader4
 {
-position: relative;
-bottom: 28px;
+position: absolute;
+top: 1600px;
 
 }
 
 #FooterFollowUS4
 {
-  left: 27px;  
+left: 607px;
+}
+
+#OurServices4
+{
+left: 389px;  
+}
+
+.textwidgetText4
+{
+position: relative;
+left: 114px;  
+}
+
+
+#FooterNewsletter4
+{
+position: absolute;
+right: 298px;
+
 }
