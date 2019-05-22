@@ -883,7 +883,14 @@ left: 174px;
 }
 
 
-.FooterHeader
+.FooterHeader4
 {
-  
+position: relative;
+bottom: 28px;
+
+}
+
+#FooterFollowUS4
+{
+  left: 27px;  
 }
