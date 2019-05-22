@@ -348,21 +348,21 @@ top: 25px;
     position: relative;
     bottom: 244px;
     font-size: 14px;
-    font-family: monospace;
+    font-family: sans-serif;
     width: 65%;
 }
 
 .navFooter:hover
 {
-  background-color:transparent;
-  height:100%;
-  width:100%;
+background-color:transparent;
+height: 16px;
+position:relative;
 }
 
-.navFooter
+.navFooter,.SocialMediaNav
 {
-  position:relative;
-  color:lightgray;
+position: relative;
+color:lightgray;
   
 }
 
@@ -878,6 +878,12 @@ opacity: 0;
 .SocialMediaFooter4
 {
 position: relative;
-bottom: 48px;
-left: 202px;  
+bottom: 102px;
+left: 174px;
+}
+
+
+.FooterHeader
+{
+  
 }
