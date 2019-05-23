@@ -149,41 +149,46 @@ top: 25px;
 
 
 
-  .textwidget
-  {
-  position: absolute;
-  right: 110px;
-  top: 3561px;
-  font-size: 14px;
-  color: lightgray;
-  }
-  .textwidget2
-  {
-  position: absolute;
-  right:110px;
-    
-  top: 3154px;
-  font-size: 14px;
-  color: lightgray;
-  }
-  .textwidget4 
-  {
-  position: absolute;
-  right: 110px;
-  top: 1639px;
-  font-size: 12px;
-  font-family: sans-serif;
-  color: lightgray;
-  }
-  .textwidget3
-  {
-  position: absolute;
-  right: 110px;
+.textwidget
+{
+position: absolute;
+right: 110px;
+top: 3561px;
+font-size: 14px;
+color: lightgray;
+}
 
-  top: 1595px;
-  font-size: 14px;
-  color: lightgray;
-  }
+.textwidget2
+{
+position: absolute;
+right: 286px;
+top: 3168px;
+font-size: 12px;
+font-family: sans-serif;
+color: lightgray;
+}
+
+.textwidget4 
+{
+position: absolute;
+right:  286px;
+top: 1639px;
+
+font-size: 12px;
+font-family: sans-serif;
+color: lightgray;
+}
+
+.textwidget3
+{
+position: absolute;
+right: 286px;
+top: 1599px;
+font-size: 12px;
+font-family: sans-serif;
+color: lightgray;
+
+}
 
   .wpcf7-submit 
   {   
@@ -393,14 +398,14 @@ left: 435px;
 }
 .page2
 {
-  bottom: 218px;
-  left: 429px;
+position: relative;
+bottom: 206px;
 }
 
 .page3
 {
-  top: -241px;
-  left: 423px;
+position: relative;
+bottom: 235px;
 }
 
 .signin-title
@@ -880,22 +885,25 @@ opacity: 0;
 {
 position: relative;
 bottom: 90px;
-left: 446px;
-zoom: 47%;
-width: 50%;
+left: 1105px;
+left: 811px;
+zoom: 80%;
+
+
 }
 
 
 .FooterHeader4
 {
 position: absolute;
-top: 1600px;
+top: 1609px;
 
 }
 
 #FooterFollowUS4
 {
-left: 607px;
+right: 150px;
+
 }
 
 #OurServices4
@@ -912,7 +920,23 @@ left: 114px;
 
 #FooterNewsletter4
 {
-position: absolute;
-right: 298px;
 
+position: absolute;
+
+left: 607px;
+
+
+
+}
+
+.FooterHeader3
+{
+position: absolute;
+top: 1564px;  
+}
+
+.FooterHeader2
+{
+position:absolute;
+top: 3133px;
 }
