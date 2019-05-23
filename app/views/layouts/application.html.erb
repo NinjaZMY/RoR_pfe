@@ -260,10 +260,8 @@ top: 1077px;
       end # end if (condition && curent_user.nil?&&condition2)
     %>
     
-    <!--Flash Messages -->
-      <% flash.each do |name,message| %>
-      <%= content_tag(:div , message , class:"alert alert-info #{name} Flash" ) %>
-      <%end # end flash for each%>
+    <!--Flash Messages Removed-->
+
     <%
     location=request.original_fullpath
     #condition stands for user connected & page = outer application page
