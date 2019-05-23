@@ -152,9 +152,10 @@ top: 25px;
 .textwidget
 {
 position: absolute;
-right: 110px;
-top: 3561px;
-font-size: 14px;
+right: 286px;
+top: 3594px;
+font-size: 12px;
+font-family: sans-serif;
 color: lightgray;
 }
 
@@ -255,15 +256,15 @@ color: lightgray;
 
   .video
   {	
-    position: absolute;
-    top:800px;
-    left:71px;
+  position: absolute;
+  top: 699px;
+  left:71px;
   }
 
   #v3
   {	
-    left: 71px;
-    top: 1174px;
+  left: 71px;
+  top: 1023px;
   }
 
     #v2
@@ -275,7 +276,7 @@ color: lightgray;
   #v4
   {
   left:650px;
-  top:1174px;
+  top: 1023px;
   }
 
   .fadenavimg 
@@ -885,10 +886,10 @@ opacity: 0;
 {
 position: relative;
 bottom: 90px;
-left: 1105px;
+
 left: 811px;
 zoom: 80%;
-
+width: 31%;
 
 }
 
@@ -939,4 +940,18 @@ top: 1564px;
 {
 position:absolute;
 top: 3133px;
+}
+
+.VideoContainer
+{
+color:#2662b2;
+font-size: 27px;  
+position: absolute;
+top: 70px;  
+}
+
+.FooterHeader
+{
+position: absolute;
+top: 3540px;  
 }
